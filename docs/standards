@@ -1,0 +1,77 @@
+# Development Standards
+
+These standards exist to keep Project Codename organized, maintainable, and enjoyable to develop.
+
+---
+
+## Player Experience
+
+- Every visible feature must provide value.
+- No empty profession tabs.
+- No "Coming Soon" placeholders.
+- Aldren should always communicate naturally.
+- The interface should remain clean and uncluttered.
+
+---
+
+## Development
+
+- Every commit must leave the application working.
+- Test before every commit.
+- Push only after successful testing.
+- Build one complete feature at a time.
+- Avoid partially implemented systems.
+
+---
+
+## Code Organization
+
+- One file, one responsibility.
+- Organize by feature, not file size.
+- Reuse existing systems whenever possible.
+- Avoid duplicate logic.
+- Keep future expansion in mind.
+
+---
+
+## Documentation
+
+Major decisions belong in DECISIONS.md.
+
+Long-term vision belongs in PROJECT-BIBLE.md.
+
+Upcoming work belongs in ROADMAP.md.
+
+Architecture changes belong in ARCHITECTURE.md.
+
+Completed work belongs in CHANGELOG.md.
+
+Current work belongs in TODO.md.
+
+---
+
+## Release Philosophy
+
+Infrastructure improvements come before feature work.
+
+Player-facing features are released only when complete.
+
+Every release should leave the project in a better state than the previous one.
+
+---
+
+## Aldren
+
+Aldren is the guide of Project Codename.
+
+Other systems provide information.
+
+Aldren provides understanding.
+
+His purpose is to help the player make better decisions while reducing the need to use outside ESO resources.
+
+---
+
+## Project Goal
+
+Build the best Elder Scrolls Online companion available.
