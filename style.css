@@ -33,3 +33,26 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
 #journalSummary{
   margin-top:12px;
 }
+
+/* Character Journal polish */
+#journal .journalSection{
+  margin-top:16px;
+  padding:14px;
+  border:1px solid var(--gold2);
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+}
+#journal .journalSection h3{
+  margin-top:0;
+  color:var(--gold);
+}
+#journal .journalRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-top:10px;
+}
+#journal .journalFuture{
+  opacity:.65;
+}
