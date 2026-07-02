@@ -24,12 +24,3 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
 .titlecard{text-align:center;padding:28px}.quote{font-style:italic;color:#edd28d;font-size:20px}
 @media(max-width:700px){body{font-size:16px}h1{font-size:26px}.controls>*{width:100%}.controls input{min-width:0}.row{align-items:flex-start;flex-direction:column}}
 
-
-/* Character Journal */
-#journal .controls input,
-#journal .controls select{
-  min-width:220px;
-}
-#journalSummary{
-  margin-top:12px;
-}

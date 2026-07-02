@@ -4,8 +4,7 @@ const POTION_WATERS=["Natural Water","Clear Water","Pristine Water","Cleansed Wa
 const POISON_SOLVENTS=["Grease","Ichor","Slime","Gall","Terebinthine","Pitch-Bile","Tarblack","Night-Oil","Alkahest"];
 const SAVE_KEY="TheAlchemistArchive_v1";let archive=loadArchive(),inventoryOnly=false,best=null,selectedEffects=[],history=JSON.parse(localStorage.TheAlchemistHistory_v1||"[]");
 function initSolvents(){let s={};POTION_WATERS.concat(POISON_SOLVENTS).forEach(x=>s[x]={qty:0,reserve:20});return s}
-function initCharacter(name){return{name:name||"Adventurer",alliance:"",alchemyLevel:50}}
-function ensureProfileShape(){let p=profile();if(!p)return;if(!p.solvents)p.solvents=initSolvents();POTION_WATERS.concat(POISON_SOLVENTS).forEach(x=>{if(!p.solvents[x])p.solvents[x]={qty:0,reserve:20}});if(!p.favoriteRecipes)p.favoriteRecipes=[];if(!p.character)p.character=initCharacter(p.name);if(!p.character.name)p.character.name=p.name||"Adventurer";if(typeof p.character.alliance==="undefined")p.character.alliance="";if(!p.character.alchemyLevel)p.character.alchemyLevel=50}
+function ensureProfileShape(){let p=profile();if(!p)return;if(!p.solvents)p.solvents=initSolvents();POTION_WATERS.concat(POISON_SOLVENTS).forEach(x=>{if(!p.solvents[x])p.solvents[x]={qty:0,reserve:20}});if(!p.favoriteRecipes)p.favoriteRecipes=[]}
 function solventData(){ensureProfileShape();return profile().solvents}
 function newProfile(name){let d={};for(const r in R)d[r]={learned:[false,false,false,false],qty:0,fav:false,reserve:20};return{id:"p_"+Date.now(),name:name||"Adventurer",created:new Date().toISOString(),lastOpen:new Date().toISOString(),data:d,solvents:initSolvents(),favoriteRecipes:[],session:{crafts:0,traits:0,complete:0},settings:{greeting:"normal"}}}
 function loadArchive(){try{let a=JSON.parse(localStorage.getItem(SAVE_KEY));if(a&&a.profiles&&a.profiles.length)return a}catch(e){}return{version:"5.4",activeProfile:null,profiles:[],created:new Date().toISOString(),lastSaved:null}}
@@ -22,25 +21,6 @@ function renderProfiles(){
  if(current&&p)current.innerHTML=`<b>${p.name}</b><br><span class=small>Aldren is currently keeping this archive open.</span>`;
  if(!box)return;
  box.innerHTML=archive.profiles.map(p=>`<button class="${p.id===archive.activeProfile?'good':'secondary'}" onclick="switchProfile('${p.id}')">${p.name}</button>`).join("");
-}
-function renderJournal(){
- let p=profile();if(!p)return;ensureProfileShape();
- let c=p.character;
- let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel"),summary=document.getElementById("journalSummary");
- if(name)name.value=c.name||p.name||"";
- if(alliance)alliance.value=c.alliance||"";
- if(alchemy)alchemy.value=c.alchemyLevel||50;
- if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span>`;
-}
-function saveJournal(){
- let p=profile();if(!p)return;ensureProfileShape();
- let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel");
- let newName=(name?.value||p.name||"Adventurer").trim()||"Adventurer";
- p.character.name=newName;p.name=newName;
- p.character.alliance=alliance?.value||"";
- p.character.alchemyLevel=Math.max(1,Math.min(50,Number(alchemy?.value||50)));
- save();
- alert("Aldren has updated your Character Journal.");
 }
 function ensureReady(){if(!archive.profiles.length){setup.style.display="block";app.style.display="none";return false}setup.style.display="none";app.style.display="block";return true}
 function snapshot(){return JSON.stringify({archive})}function restore(s){archive=JSON.parse(s).archive}
@@ -92,7 +72,7 @@ function chooseGreeting(name,known,total,low){
 }
 function gatherAdvice(){let theoretical=ALL.map(c=>scoreCombo(c,data(),false)).filter(Boolean).sort((a,b)=>b.score-a.score)[0];if(!theoretical)return "The archives may be complete, or no useful experiment remains.";let missing=theoretical.c.filter(r=>Number(data()[r].qty||0)<1);return `Aldren found no useful discovery you can craft with your current reagents.<br><br><span class=small>To pursue the strongest next experiment, gather:</span><br>${missing.map(x=>`<span class=pill>${x}</span>`).join("")}`;}
 function buildPlan(){let state=cloneState(data()),steps=[],safety=0;while(safety++<80){let r=ranked(state,inventoryOnly)[0];if(!r)break;steps.push(r);applyCraftToState(state,r)}planSummary.innerHTML=steps.length?`Plan found: <b>${steps.length}</b> experiments. Estimated new traits: <b>${steps.reduce((a,s)=>a+s.disc.length,0)}</b>.`:"No useful plan found. Try turning inventory-only OFF.";planList.innerHTML=steps.slice(0,30).map((s,i)=>`<div class=planStep><b>Experiment #${i+1}</b><br>${s.c.join(" + ")}<br><span class=small>${s.disc.length} discoveries: ${s.disc.map(d=>d[1]).join(", ")}</span></div>`).join("")}
-function showTab(id,btn){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");if(id==="journal")renderJournal();renderBuilder()}
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderBuilder()}
 
 function renderFieldNote(allKnown,total,complete,owned,low){
  let box=document.getElementById("fieldNote");if(!box)return;
@@ -184,5 +164,4 @@ function renderVerification(){
 }
 function toggleEffect(e){selectedEffects=selectedEffects.includes(e)?selectedEffects.filter(x=>x!==e):selectedEffects.concat(e);renderBuilder()}function markBest(){if(!best)return;history.push(snapshot());if(history.length>20)history.shift();localStorage.TheAlchemistHistory_v1=JSON.stringify(history);let bk=countKnown(),bc=countComplete();best.disc.forEach(disc=>data()[disc[0]].learned[disc[2]]=true);best.c.forEach(r=>data()[r].qty=Math.max(0,Number(data()[r].qty||0)-1));session().crafts++;session().traits+=Math.max(0,countKnown()-bk);session().complete+=Math.max(0,countComplete()-bc);save()}
 function undoLast(){if(!history.length){alert("Aldren found no previous record to restore.");return}restore(history.pop());localStorage.TheAlchemistHistory_v1=JSON.stringify(history);save()}function markOwnedFirstTrait(){history.push(snapshot());for(const r in R){if(Number(data()[r].qty||0)>0)data()[r].learned[0]=true}save()}function resetSession(){profile().session={crafts:0,traits:0,complete:0};save()}function exportSave(){prompt("Copy this archive text:",JSON.stringify(archive))}function importSave(){let x=prompt("Paste archive text:");if(x){archive=JSON.parse(x);save()}}function copyCorrectionTemplate(){let t=document.getElementById("correctionTemplate");if(!t)return;t.select();document.execCommand("copy");alert("Correction template copied.")}function resetAll(){if(confirm("Reset The Alchemist archive on this browser?")){localStorage.removeItem(SAVE_KEY);localStorage.removeItem("TheAlchemistHistory_v1");location.reload()}}function togglePlayMode(){document.body.classList.toggle("playing")}render();
-
 
