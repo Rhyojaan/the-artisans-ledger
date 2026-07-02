@@ -27,6 +27,16 @@ function renderProfiles(){
  box.innerHTML=archive.profiles.map(p=>`<button class="${p.id===archive.activeProfile?'good':'secondary'}" onclick="switchProfile('${p.id}')">${p.name}</button>`).join("");
  renderJournal();
 }
+function aldrenJournalNote(){
+ let p=profile();if(!p)return "";
+ ensureProfileShape();
+ let known=countKnown(),total=Object.keys(R).length*4,pct=Math.round(known/total*100),c=p.character||{};
+ if(pct>=100)return `${c.name||p.name} has completed the alchemical archive. Few records in Tamriel are this complete.`;
+ if(pct>=75)return `${c.name||p.name} is nearing mastery. The remaining discoveries deserve careful attention.`;
+ if(pct>=40)return `${c.name||p.name}'s archive is taking shape. Patience and steady experimentation will finish the work.`;
+ if(known>0)return `${c.name||p.name} has begun the work. Every recorded trait strengthens the archive.`;
+ return `${c.name||p.name} stands at the beginning of the path. The first discovery awaits.`;
+}
 function renderJournal(){
  let p=profile();if(!p)return;ensureProfileShape();
  let c=p.character;
@@ -34,7 +44,7 @@ function renderJournal(){
  if(name)name.value=c.name||p.name||"";
  if(alliance)alliance.value=c.alliance||"";
  if(alchemy)alchemy.value=c.alchemyLevel||50;
- if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span>`;
+ if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${aldrenJournalNote()}`;
 }
 function saveJournal(){
  let p=profile();if(!p)return;ensureProfileShape();
@@ -188,6 +198,7 @@ function renderVerification(){
 }
 function toggleEffect(e){selectedEffects=selectedEffects.includes(e)?selectedEffects.filter(x=>x!==e):selectedEffects.concat(e);renderBuilder()}function markBest(){if(!best)return;history.push(snapshot());if(history.length>20)history.shift();localStorage.TheAlchemistHistory_v1=JSON.stringify(history);let bk=countKnown(),bc=countComplete();best.disc.forEach(disc=>data()[disc[0]].learned[disc[2]]=true);best.c.forEach(r=>data()[r].qty=Math.max(0,Number(data()[r].qty||0)-1));session().crafts++;session().traits+=Math.max(0,countKnown()-bk);session().complete+=Math.max(0,countComplete()-bc);save()}
 function undoLast(){if(!history.length){alert("Aldren found no previous record to restore.");return}restore(history.pop());localStorage.TheAlchemistHistory_v1=JSON.stringify(history);save()}function markOwnedFirstTrait(){history.push(snapshot());for(const r in R){if(Number(data()[r].qty||0)>0)data()[r].learned[0]=true}save()}function resetSession(){profile().session={crafts:0,traits:0,complete:0};save()}function exportSave(){prompt("Copy this archive text:",JSON.stringify(archive))}function importSave(){let x=prompt("Paste archive text:");if(x){archive=JSON.parse(x);save()}}function copyCorrectionTemplate(){let t=document.getElementById("correctionTemplate");if(!t)return;t.select();document.execCommand("copy");alert("Correction template copied.")}function resetAll(){if(confirm("Reset The Alchemist archive on this browser?")){localStorage.removeItem(SAVE_KEY);localStorage.removeItem("TheAlchemistHistory_v1");location.reload()}}function togglePlayMode(){document.body.classList.toggle("playing")}render();
+
 
 
 
