@@ -157,7 +157,32 @@ function chooseGreeting(name,known,total,low){
 }
 function gatherAdvice(){let theoretical=ALL.map(c=>scoreCombo(c,data(),false)).filter(Boolean).sort((a,b)=>b.score-a.score)[0];if(!theoretical)return "The archives may be complete, or no useful experiment remains.";let missing=theoretical.c.filter(r=>Number(data()[r].qty||0)<1);return `Aldren found no useful discovery you can craft with your current reagents.<br><br><span class=small>To pursue the strongest next experiment, gather:</span><br>${missing.map(x=>`<span class=pill>${x}</span>`).join("")}`;}
 function buildPlan(){let state=cloneState(data()),steps=[],safety=0;while(safety++<80){let r=ranked(state,inventoryOnly)[0];if(!r)break;steps.push(r);applyCraftToState(state,r)}planSummary.innerHTML=steps.length?`Plan found: <b>${steps.length}</b> experiments. Estimated new traits: <b>${steps.reduce((a,s)=>a+s.disc.length,0)}</b>.`:"No useful plan found. Try turning inventory-only OFF.";planList.innerHTML=steps.slice(0,30).map((s,i)=>`<div class=planStep><b>Experiment #${i+1}</b><br>${s.c.join(" + ")}<br><span class=small>${s.disc.length} discoveries: ${s.disc.map(d=>d[1]).join(", ")}</span></div>`).join("")}
-function showTab(id,btn){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");if(id==="journal")renderJournal();renderBuilder()}
+function showTab(id,btn){
+ let current=document.querySelector(".panel.active");
+ let next=document.getElementById(id);
+ if(!next)return;
+
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+
+ if(current && current!==next){
+  current.classList.add("chapterLeaving");
+
+  setTimeout(()=>{
+   current.classList.remove("active","chapterLeaving");
+   next.classList.add("active","chapterEntering");
+
+   if(id==="journal")renderJournal();
+   renderBuilder();
+
+   setTimeout(()=>next.classList.remove("chapterEntering"),260);
+  },180);
+ }else{
+  next.classList.add("active");
+  if(id==="journal")renderJournal();
+  renderBuilder();
+ }
+}
 
 function renderFieldNote(allKnown,total,complete,owned,low){
  let box=document.getElementById("fieldNote");if(!box)return;
@@ -255,17 +280,9 @@ function toggleJournalEdit(){
  if(!box)return;
  box.style.display=box.style.display==="none"?"block":"none";
  renderJournal();
-}render();
-
-
-
-
-
-
-
-
-
-
-
-
-
+}function openLedger(){
+ let gate=document.getElementById("tomeGate");
+ if(gate)gate.classList.add("tomeOpening");
+ setTimeout(()=>{if(gate)gate.style.display="none";},650);
+}
+render();

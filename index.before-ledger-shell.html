@@ -4,11 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Artisan's Ledger</title>
 <link rel="stylesheet" href="style.css"></head>
-<body>
-<header class="ledgerTop">
-  <h1>The Artisan's Ledger</h1>
-  <div class="small">Volume I � Alchemy � Maintained by Aldren the Archivist</div>
-</header>
+<body><header><h1>⚗️ The Artisan's Ledger</h1><div class="small">Release 5.4 — The Archivist • Aldren the Archivist</div></header>
 <div class="wrap">
 <div id="setup" class="card titlecard" style="display:none">
 <h1>⚗️ The Artisan's Ledger</h1><p class="quote">“Knowledge, once recorded, is never truly lost.”</p><p class="small">— Aldren the Archivist</p>
@@ -18,19 +14,7 @@
 <div class="card advisor"><h2 id="welcomeLine">Welcome back.</h2><div id="greetingBox" class="recipe"></div></div>
 <div class="topgrid"><div class="card"><div class="small">Traits Recorded</div><div id="traitStat" class="stat">0/0</div></div><div class="card"><div class="small">Reagents Complete</div><div id="ingStat" class="stat">0/0</div></div><div class="card"><div class="small">Reagents Owned</div><div id="ownedStat" class="stat">0</div></div><div class="card"><div class="small">Useful Experiments</div><div id="craftStat" class="stat">0</div></div></div>
 <div class="card"><div class="row"><b>Archive Progress</b><b id="pct">0%</b></div><div class="bar"><div id="fill" class="fill"></div></div><div id="remainingText" class="small" style="margin-top:8px"></div></div>
-<div class="ledgerShell">
-  <aside class="ledgerSidebar">
-    <div class="ledgerBrand">The Artisan's Ledger</div>
-    <div class="ledgerVolume">Volume I</div>
-    <div class="ledgerProfession">Alchemy</div>
-    <div class="ledgerDivider"></div>
-    <div class="ledgerContentsTitle">Contents</div>
-    <nav class="tabs ledgerContents">
-<button class="tab active" onclick="showTab('advisor',this)">Aldren</button><button class="tab" onclick="showTab('plan',this)">Completion Plan</button><button class="tab" onclick="showTab('ingredients',this)">Reagents</button><button class="tab" onclick="showTab('builder',this)">Laboratory</button><button class="tab" onclick="showTab('session',this)">Session</button><button class="tab" onclick="showTab('verification',this)">Archive Verification</button><button class="tab" onclick="showTab('journal',this)">Character Journal</button><button class="tab" onclick="showTab('settings',this)">Settings</button><button class="tab" onclick="showTab('saves',this)">Saves</button>
-    </nav>
-  </aside>
-
-  <main class="ledgerPages">
+<div class="tabs"><button class="tab active" onclick="showTab('advisor',this)">Aldren</button><button class="tab" onclick="showTab('plan',this)">Completion Plan</button><button class="tab" onclick="showTab('ingredients',this)">Reagents</button><button class="tab" onclick="showTab('builder',this)">Laboratory</button><button class="tab" onclick="showTab('session',this)">Session</button><button class="tab" onclick="showTab('verification',this)">Archive Verification</button><button class="tab" onclick="showTab('journal',this)">Character Journal</button><button class="tab" onclick="showTab('settings',this)">Settings</button><button class="tab" onclick="showTab('saves',this)">Saves</button></div>
 <section id="advisor" class="panel active"><div class="card advisor"><h2>Aldren's Recommendation</h2><div id="advisorText" class="recipe"></div><div class="controls" style="margin-top:12px"><button class="good" onclick="markBest()">Crafted it — record discovery</button><button class="secondary" onclick="undoLast()">Undo Last Craft</button><button class="secondary" onclick="inventoryOnly=!inventoryOnly;render()">Craftable-only: <span id="invMode">OFF</span></button><button class="secondary" onclick="togglePlayMode()">Game Mode</button></div></div><div class="card"><h2>Next 5 Experiments</h2><div id="nextFive"></div></div>
   <div class="card advisor">
     <h2>Inventory Report</h2>
@@ -198,11 +182,8 @@ Notes:</textarea>
 </section>
 
 <section id="saves" class="panel"><div class="card"><h2>Archive Tools</h2><div class="controls"><button onclick="exportSave()">Export Archive</button><button onclick="importSave()">Import Archive</button><button class="danger" onclick="resetAll()">Reset Everything</button></div><p class="small">Progress saves automatically in this browser.</p><div class="notice"><b>Release 5.4 — The Archivist</b><br>Removed green note styling, added Aldren Field Notes, added correction report template, added data audit, and added low-reserve reagent filtering.</div></div></section>
-  </main>
-</div>
 </div></div>
 <script src="script.js"></script></body></html>
-
 
 
 
