@@ -84,48 +84,73 @@ Notes:</textarea>
 </section>
 
 <section id="journal" class="panel">
-  <div class="card advisor journalPage">
-    <div class="journalHeader">
-  <div class="journalTitle">Aldren's Character Journal</div>
-  <div class="journalSubtitle">Maintained for <span id="journalHeaderName"></span></div>
-  <div class="journalLastUpdated">
-    Last Updated:
-    <span id="journalLastUpdated"></span>
+  <div class="journalBook">
+
+    <div class="journalHero">
+      <div class="journalBookIcon">BOOK</div>
+      <div>
+        <div class="journalTitle">Aldren's Character Journal</div>
+        <div class="journalSubtitle">Maintained for <span id="journalHeaderName"></span></div>
+      </div>
+      <div class="journalUpdated">Last Updated: <span id="journalLastUpdated"></span></div>
+    </div>
+
+    <div id="journalSummary" class="journalIntro"></div>
+
+    <div class="journalMainGrid">
+      <div class="journalPanel">
+        <h3>Character Record</h3>
+        <div id="characterRecordDisplay" class="journalRecord"></div>
+      </div>
+
+      <div class="journalPanel">
+        <h3>Professions</h3>
+        <div id="professionSummary" class="journalProfession"></div>
+        <div class="futureProfessionList">
+          <div>Blacksmithing <span>Not tracked yet</span></div>
+          <div>Clothing <span>Not tracked yet</span></div>
+          <div>Woodworking <span>Not tracked yet</span></div>
+          <div>Enchanting <span>Not tracked yet</span></div>
+          <div>Jewelry <span>Not tracked yet</span></div>
+          <div>Provisioning <span>Not tracked yet</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journalThreeGrid">
+      <div class="journalPanel">
+        <h3>Champion Points</h3>
+        <div class="emptyJournalBox">Not tracked yet.<br><span>Champion data will be recorded here.</span></div>
+      </div>
+
+      <div class="journalPanel">
+        <h3>Achievements</h3>
+        <div class="emptyJournalBox">Not tracked yet.<br><span>Achievement data will be recorded here.</span></div>
+      </div>
+
+      <div class="journalPanel">
+        <h3>Aldren's Notes</h3>
+        <div id="aldrenJournalNoteBox" class="emptyJournalBox"></div>
+      </div>
+    </div>
+
+    <div class="journalSeal">
+      <div class="sealDivider"></div>
+      <div class="sealEmblem">
+        <div class="sealIcon">A</div>
+        <div class="sealWord">ALDREN</div>
+        <div class="sealWordSmall">ARCHIVE</div>
+      </div>
+      <div class="sealSignature">Recorded faithfully by</div>
+      <div class="sealName">Aldren the Archivist</div>
+      <div class="sealTitle">Keeper of the Alchemical Archive</div>
+      <div class="sealDate"><span id="journalSealDate"></span></div>
+    </div>
+
   </div>
-</div>
-    <p class="small">Aldren keeps this journal so his guidance can match the character standing before him.</p>
 
-    <div id="journalSummary" class="recipe"></div>
-
-    <div class="journalSection">
-      <h3>Character Record</h3>
-      <p class="small">This record identifies the adventurer whose archive Aldren maintains.</p>
-      <div id="characterRecordDisplay" class="journalRecord"></div>
-    </div>
-
-    <div class="journalSection">
-      <h3>Professions</h3>
-      <div id="professionSummary" class="journalProfession"></div>
-      <p class="small">Only Alchemy is currently tracked. Additional professions will appear here as they are completed.</p>
-    </div>
-
-    <div class="journalSection journalFuture">
-      <h3>Champion Points <span class="comingSoon">Coming Soon</span></h3>
-      <p class="small">This section will record your Champion Point allocation once the CP planner is completed.</p>
-    </div>
-
-    <div class="journalSection journalFuture">
-      <h3>Major Achievements <span class="comingSoon">Coming Soon</span></h3>
-      <p class="small">Titles, milestones, and major accomplishments for this character will be preserved here.</p>
-    </div>
-
-    <div class="journalSection">
-      <h3>Aldren's Notes</h3>
-      <div id="aldrenJournalNoteBox" class="recipe"></div>
-    </div>
-  </div>
-
-  <div id="journalEditBox" class="card journalEdit" style="display:none"><h2>Edit Character Journal</h2>
+  <div id="journalEditBox" class="card journalEdit" style="display:none">
+    <h2>Edit Character Journal</h2>
     <div class="controls">
       <input id="journalName" placeholder="Character name">
       <select id="journalAlliance">
@@ -137,7 +162,13 @@ Notes:</textarea>
       <input id="journalAlchemyLevel" type="number" min="1" max="50" value="50" placeholder="Alchemy level">
       <button onclick="saveJournal()">Save Journal</button>
     </div>
-  </div><div class="controls" style="margin-top:14px"><button onclick="toggleJournalEdit()">Edit Journal</button></div></section><section id="settings" class="panel">
+  </div>
+
+  <div class="controls" style="margin-top:14px">
+    <button onclick="toggleJournalEdit()">Edit Journal</button>
+  </div>
+</section>
+<section id="settings" class="panel">
   <div class="card">
     <h2>Archive Settings</h2>
     <p class="small">Manage your characters here. Each archive keeps its own satchel, traits, favorites, and session stats.</p>
@@ -177,6 +208,10 @@ Notes:</textarea>
 <section id="saves" class="panel"><div class="card"><h2>Archive Tools</h2><div class="controls"><button onclick="exportSave()">Export Archive</button><button onclick="importSave()">Import Archive</button><button class="danger" onclick="resetAll()">Reset Everything</button></div><p class="small">Progress saves automatically in this browser.</p><div class="notice"><b>Release 5.4 — The Archivist</b><br>Removed green note styling, added Aldren Field Notes, added correction report template, added data audit, and added low-reserve reagent filtering.</div></div></section>
 </div></div>
 <script src="script.js"></script></body></html>
+
+
+
+
 
 
 

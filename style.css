@@ -237,3 +237,236 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   font-size:1.45rem;
   color:var(--gold);
 }
+
+/* Sprint 14 - Book style Character Journal */
+#journal .journalBook{
+  background:
+    radial-gradient(circle at top left, rgba(221,176,78,.10), transparent 28%),
+    linear-gradient(180deg, rgba(37,28,17,.98), rgba(11,8,5,.98));
+  border:1px solid rgba(221,176,78,.55);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 0 28px rgba(0,0,0,.55), inset 0 0 55px rgba(0,0,0,.35);
+}
+
+#journal .journalHero{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:18px;
+  align-items:center;
+  border-bottom:1px solid rgba(221,176,78,.4);
+  padding-bottom:18px;
+  margin-bottom:22px;
+}
+
+#journal .journalBookIcon{
+  border:1px solid rgba(221,176,78,.5);
+  border-radius:10px;
+  padding:10px 12px;
+  color:var(--gold);
+  font-size:.75rem;
+  letter-spacing:2px;
+}
+
+#journal .journalTitle{
+  font-size:2rem;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--gold);
+}
+
+#journal .journalSubtitle,
+#journal .journalUpdated{
+  color:var(--text);
+  opacity:.9;
+}
+
+#journal .journalIntro{
+  font-size:1.25rem;
+  margin:10px 0 26px;
+  color:var(--text);
+}
+
+#journal .journalMainGrid{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:22px;
+}
+
+#journal .journalThreeGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:22px;
+}
+
+#journal .journalPanel{
+  border:1px solid rgba(221,176,78,.5);
+  border-radius:14px;
+  padding:20px;
+  background:linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.34));
+  box-shadow:inset 0 0 22px rgba(0,0,0,.3);
+}
+
+#journal .journalPanel h3{
+  margin-top:0;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--gold);
+  border-bottom:1px solid rgba(221,176,78,.35);
+  padding-bottom:10px;
+}
+
+#journal .journalRecord{
+  display:block;
+}
+
+#journal .journalRecord div{
+  border:0;
+  border-bottom:1px solid rgba(221,176,78,.28);
+  border-radius:0;
+  background:transparent;
+  padding:14px 0;
+  box-shadow:none;
+}
+
+#journal .journalRecord div:last-child{
+  border-bottom:0;
+}
+
+#journal .journalRecord b{
+  font-size:1.35rem;
+  color:var(--text);
+}
+
+#journal .journalRecord .small{
+  color:var(--gold);
+  text-transform:none;
+  letter-spacing:.5px;
+  font-size:.9rem;
+}
+
+#journal .professionCard{
+  border:0;
+  border-bottom:1px solid rgba(221,176,78,.35);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  padding:10px 0 18px;
+}
+
+#journal .professionIcon{
+  border:1px solid rgba(221,176,78,.4);
+  border-radius:50%;
+  width:46px;
+  height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#journal .futureProfessionList{
+  margin-top:14px;
+}
+
+#journal .futureProfessionList div{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:8px 0;
+  color:var(--muted);
+}
+
+#journal .futureProfessionList span{
+  font-style:italic;
+  opacity:.75;
+}
+
+#journal .emptyJournalBox{
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:var(--text);
+  opacity:.9;
+  line-height:1.5;
+}
+
+#journal .emptyJournalBox span{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+#journal .journalSeal{
+  margin-top:46px;
+  text-align:center;
+}
+
+#journal .sealDivider{
+  height:1px;
+  width:70%;
+  margin:0 auto 28px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+#journal .sealEmblem{
+  width:150px;
+  height:150px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  border:4px double var(--gold);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 35% 25%, rgba(255,255,255,.08), rgba(0,0,0,.35));
+  box-shadow:0 0 22px rgba(0,0,0,.55), inset 0 0 24px rgba(0,0,0,.35);
+}
+
+#journal .sealIcon{
+  font-size:2.3rem;
+  color:var(--gold);
+  font-weight:bold;
+}
+
+#journal .sealWord{
+  color:var(--gold);
+  font-size:1.35rem;
+  letter-spacing:2px;
+}
+
+#journal .sealWordSmall{
+  font-size:.85rem;
+  letter-spacing:4px;
+  opacity:.8;
+}
+
+#journal .sealSignature{
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:.8rem;
+}
+
+#journal .sealName{
+  color:var(--gold);
+  font-size:1.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-top:6px;
+}
+
+#journal .sealTitle,
+#journal .sealDate{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+@media(max-width:900px){
+  #journal .journalHero,
+  #journal .journalMainGrid,
+  #journal .journalThreeGrid{
+    grid-template-columns:1fr;
+  }
+}
