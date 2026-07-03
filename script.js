@@ -45,6 +45,14 @@ function renderJournal(){
  if(alliance)alliance.value=c.alliance||"";
  if(alchemy)alchemy.value=c.alchemyLevel||50;
  if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${aldrenJournalNote()}`;
+
+let prof=document.getElementById("professionSummary");
+if(prof){
+prof.innerHTML=`
+<span class="pill">?? Alchemy</span>
+<span class="pill">Level ${c.alchemyLevel||50}/50</span>
+`;
+}
 }
 function saveJournal(){
  let p=profile();if(!p)return;ensureProfileShape();
@@ -197,8 +205,40 @@ function renderVerification(){
  vl.innerHTML=names.sort().map(r=>`<div class="card"><h3>${r}</h3><ol>${R[r].map(t=>`<li>${t}</li>`).join("")}</ol></div>`).join("");
 }
 function toggleEffect(e){selectedEffects=selectedEffects.includes(e)?selectedEffects.filter(x=>x!==e):selectedEffects.concat(e);renderBuilder()}function markBest(){if(!best)return;history.push(snapshot());if(history.length>20)history.shift();localStorage.TheAlchemistHistory_v1=JSON.stringify(history);let bk=countKnown(),bc=countComplete();best.disc.forEach(disc=>data()[disc[0]].learned[disc[2]]=true);best.c.forEach(r=>data()[r].qty=Math.max(0,Number(data()[r].qty||0)-1));session().crafts++;session().traits+=Math.max(0,countKnown()-bk);session().complete+=Math.max(0,countComplete()-bc);save()}
-function undoLast(){if(!history.length){alert("Aldren found no previous record to restore.");return}restore(history.pop());localStorage.TheAlchemistHistory_v1=JSON.stringify(history);save()}function markOwnedFirstTrait(){history.push(snapshot());for(const r in R){if(Number(data()[r].qty||0)>0)data()[r].learned[0]=true}save()}function resetSession(){profile().session={crafts:0,traits:0,complete:0};save()}function exportSave(){prompt("Copy this archive text:",JSON.stringify(archive))}function importSave(){let x=prompt("Paste archive text:");if(x){archive=JSON.parse(x);save()}}function copyCorrectionTemplate(){let t=document.getElementById("correctionTemplate");if(!t)return;t.select();document.execCommand("copy");alert("Correction template copied.")}function resetAll(){if(confirm("Reset The Alchemist archive on this browser?")){localStorage.removeItem(SAVE_KEY);localStorage.removeItem("TheAlchemistHistory_v1");location.reload()}}function togglePlayMode(){document.body.classList.toggle("playing")}render();
+function undoLast(){if(!history.length){alert("Aldren found no previous record to restore.");return}restore(history.pop());localStorage.TheAlchemistHistory_v1=JSON.stringify(history);save()}function markOwnedFirstTrait(){history.push(snapshot());for(const r in R){if(Number(data()[r].qty||0)>0)data()[r].learned[0]=true}save()}function resetSession(){profile().session={crafts:0,traits:0,complete:0};save()}function exportSave(){prompt("Copy this archive text:",JSON.stringify(archive))}function importSave(){let x=prompt("Paste archive text:");if(x){archive=JSON.parse(x);save()}}function copyCorrectionTemplate(){let t=document.getElementById("correctionTemplate");if(!t)return;t.select();document.execCommand("copy");alert("Correction template copied.")}function resetAll(){if(confirm("Reset The Alchemist archive on this browser?")){localStorage.removeItem(SAVE_KEY);localStorage.removeItem("TheAlchemistHistory_v1");location.reload()}}function togglePlayMode(){document.body.classList.toggle("playing")}
+// Sprint 7 Character Journal Overrides
+function renderJournal(){
+ let p=profile();if(!p)return;ensureProfileShape();
+ let c=p.character;
+ let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel");
+ if(name)name.value=c.name||p.name||"";
+ if(alliance)alliance.value=c.alliance||"";
+ if(alchemy)alchemy.value=c.alchemyLevel||50;
 
+ let note=aldrenJournalNote();
 
+ let summary=document.getElementById("journalSummary");
+ if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${note}`;
 
+ let record=document.getElementById("characterRecordDisplay");
+ if(record)record.innerHTML=`
+  <div><span class="small">Name</span><b>${c.name||p.name||"Adventurer"}</b></div>
+  <div><span class="small">Alliance</span><b>${c.alliance||"Alliance not recorded"}</b></div>
+  <div><span class="small">Alchemy Level</span><b>${c.alchemyLevel||50}</b></div>
+ `;
 
+ let prof=document.getElementById("professionSummary");
+ if(prof)prof.innerHTML=`
+  <div class="professionCard">
+    <span class="professionIcon">??</span>
+    <b>Alchemy</b>
+    <span class="pill">Level ${c.alchemyLevel||50} / 50</span>
+  </div>
+ `;
+
+ let noteBox=document.getElementById("aldrenJournalNoteBox");
+ if(noteBox)noteBox.textContent=note;
+}
+
+function showTab(id,btn){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");if(id==="journal")renderJournal();renderBuilder()}
+render();

@@ -56,3 +56,65 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
 #journal .journalFuture{
   opacity:.65;
 }
+
+/* Character Record display */
+.journalRecord{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.journalRecord div{
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  padding:12px;
+  background:rgba(0,0,0,.22);
+}
+.journalRecord b{
+  display:block;
+  margin-top:6px;
+  color:var(--text);
+  font-size:1.1rem;
+}
+
+/* Sprint 7 Character Journal visual upgrade */
+.journalPage{
+  border:1px solid var(--gold2);
+  box-shadow:0 0 0 1px rgba(221,176,78,.15), inset 0 0 40px rgba(0,0,0,.25);
+}
+.journalRecord{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.journalRecord div,.professionCard{
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  padding:12px;
+  background:rgba(0,0,0,.22);
+}
+.journalRecord b{
+  display:block;
+  margin-top:6px;
+  color:var(--text);
+  font-size:1.1rem;
+}
+.professionCard{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  margin-top:12px;
+}
+.professionIcon{
+  font-size:1.7rem;
+}
+.comingSoon{
+  float:right;
+  font-size:.85rem;
+  color:var(--muted);
+  border:1px solid var(--gold2);
+  border-radius:999px;
+  padding:4px 10px;
+}
