@@ -34,6 +34,210 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   margin-top:12px;
 }
 
+/* Character Journal polish */
+#journal .journalSection{
+  margin-top:16px;
+  padding:14px;
+  border:1px solid var(--gold2);
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+}
+#journal .journalSection h3{
+  margin-top:0;
+  color:var(--gold);
+}
+#journal .journalRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-top:10px;
+}
+#journal .journalFuture{
+  opacity:.65;
+}
+
+/* Character Record display */
+.journalRecord{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.journalRecord div{
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  padding:12px;
+  background:rgba(0,0,0,.22);
+}
+.journalRecord b{
+  display:block;
+  margin-top:6px;
+  color:var(--text);
+  font-size:1.1rem;
+}
+
+/* Sprint 7 Character Journal visual upgrade */
+.journalPage{
+  border:1px solid var(--gold2);
+  box-shadow:0 0 0 1px rgba(221,176,78,.15), inset 0 0 40px rgba(0,0,0,.25);
+}
+.journalRecord{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.journalRecord div,.professionCard{
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  padding:12px;
+  background:rgba(0,0,0,.22);
+}
+.journalRecord b{
+  display:block;
+  margin-top:6px;
+  color:var(--text);
+  font-size:1.1rem;
+}
+.professionCard{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  margin-top:12px;
+}
+.professionIcon{
+  font-size:1.7rem;
+}
+.comingSoon{
+  float:right;
+  font-size:.85rem;
+  color:var(--muted);
+  border:1px solid var(--gold2);
+  border-radius:999px;
+  padding:4px 10px;
+}
+
+/* Sprint 8 Journal edit mode */
+.journalEdit{
+  border-style:dashed;
+}
+
+/* Sprint 10 Journal Header */
+
+.journalHeader{
+    text-align:center;
+    border-bottom:2px solid var(--gold2);
+    padding-bottom:18px;
+    margin-bottom:20px;
+}
+
+.journalTitle{
+    font-size:2rem;
+    font-weight:bold;
+    color:var(--gold);
+    letter-spacing:1px;
+}
+
+.journalSubtitle{
+    margin-top:8px;
+    font-size:1.05rem;
+}
+
+.journalLastUpdated{
+    margin-top:10px;
+    font-size:.9rem;
+    opacity:.75;
+}
+
+/* Sprint 11 Elder Scrolls journal styling */
+#journal .journalPage{
+  background:
+    radial-gradient(circle at top, rgba(221,176,78,.10), transparent 35%),
+    linear-gradient(180deg, rgba(43,30,17,.96), rgba(15,10,5,.96));
+  border:1px solid var(--gold2);
+  border-radius:18px;
+  box-shadow:
+    0 0 24px rgba(0,0,0,.45),
+    inset 0 0 50px rgba(0,0,0,.35);
+}
+
+#journal .journalHeader{
+  padding:10px 0 20px;
+  margin-bottom:22px;
+  border-bottom:1px solid var(--gold2);
+  position:relative;
+}
+
+#journal .journalHeader:after{
+  content:"";
+  display:block;
+  width:70%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:16px auto 0;
+}
+
+#journal .journalTitle{
+  text-transform:uppercase;
+  letter-spacing:2px;
+  text-shadow:0 2px 8px rgba(0,0,0,.7);
+}
+
+#journal .journalSection{
+  background:
+    linear-gradient(180deg, rgba(221,176,78,.08), rgba(0,0,0,.16));
+  border:1px solid rgba(221,176,78,.45);
+  box-shadow:inset 0 0 20px rgba(0,0,0,.28);
+}
+
+#journal .journalSection h3{
+  border-bottom:1px solid rgba(221,176,78,.35);
+  padding-bottom:8px;
+  margin-bottom:10px;
+  letter-spacing:1px;
+}
+
+#journal .journalRecord div,
+#journal .professionCard{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.35));
+  border:1px solid rgba(221,176,78,.45);
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+}
+
+#journal .journalRecord .small{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:.72rem;
+}
+
+#journal .professionCard b{
+  color:var(--gold);
+  font-size:1.15rem;
+}
+
+#journal .comingSoon{
+  background:rgba(0,0,0,.22);
+}
+
+#aldrenJournalNoteBox{
+  font-style:italic;
+  line-height:1.55;
+}
+
+/* Sprint 12 Character Dossier */
+.journalRecord .dossierWide{
+  grid-column:1 / -1;
+  text-align:center;
+}
+.journalRecord .dossierWide b{
+  font-size:1.45rem;
+  color:var(--gold);
+}
+
 /* Sprint 14 - Book style Character Journal */
 #journal .journalBook{
   background:
@@ -265,27 +469,4 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   #journal .journalThreeGrid{
     grid-template-columns:1fr;
   }
-}
-
-
-/* Journal typography alignment */
-#journal{
-  font-family:inherit;
-}
-
-#journal .journalTitle,
-#journal .journalPanel h3,
-#journal .sealName,
-#journal .sealWord{
-  font-family:inherit;
-}
-
-#journal .journalTitle{
-  letter-spacing:1px;
-  text-transform:none;
-}
-
-#journal .journalPanel h3{
-  letter-spacing:1px;
-  text-transform:none;
 }
