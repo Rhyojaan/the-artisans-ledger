@@ -47,20 +47,36 @@ function renderJournal(){
 
  let note=aldrenJournalNote();
 
+let headerName=document.getElementById("journalHeaderName");
+if(headerName)headerName.textContent=c.name||p.name||"Adventurer";
+
+let updated=document.getElementById("journalLastUpdated");
+if(updated){
+ if(archive.lastSaved){
+   updated.textContent=new Date(archive.lastSaved).toLocaleString();
+ }else{
+   updated.textContent="Never";
+ }
+}
+
  let summary=document.getElementById("journalSummary");
- if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${note}`;
+ if(summary)summary.innerHTML=`Maintained for <b>${c.name||p.name||"Adventurer"}</b>`;
 
  let record=document.getElementById("characterRecordDisplay");
- if(record)record.innerHTML=`
+if(record){
+ let known=countKnown();
+ let total=Object.keys(R).length*4;
+ record.innerHTML=`
   <div><span class="small">Name</span><b>${c.name||p.name||"Adventurer"}</b></div>
   <div><span class="small">Alliance</span><b>${c.alliance||"Alliance not recorded"}</b></div>
-  <div><span class="small">Alchemy Level</span><b>${c.alchemyLevel||50}</b></div>
+  <div><span class="small">Alchemical Archive</span><b>${known} / ${total} Traits Recorded</b></div>
  `;
+}
 
- let prof=document.getElementById("professionSummary");
+let prof=document.getElementById("professionSummary");
  if(prof)prof.innerHTML=`
   <div class="professionCard">
-    <span class="professionIcon">??</span>
+    <span class="professionIcon">&#9879;</span>
     <b>Alchemy</b>
     <span class="pill">Level ${c.alchemyLevel||50} / 50</span>
   </div>
@@ -240,6 +256,15 @@ function toggleJournalEdit(){
  box.style.display=box.style.display==="none"?"block":"none";
  renderJournal();
 }render();
+
+
+
+
+
+
+
+
+
 
 
 
