@@ -118,3 +118,8 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   border-radius:999px;
   padding:4px 10px;
 }
+
+/* Sprint 8 Journal edit mode */
+.journalEdit{
+  border-style:dashed;
+}

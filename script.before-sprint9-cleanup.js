@@ -40,34 +40,19 @@ function aldrenJournalNote(){
 function renderJournal(){
  let p=profile();if(!p)return;ensureProfileShape();
  let c=p.character;
- let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel");
+ let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel"),summary=document.getElementById("journalSummary");
  if(name)name.value=c.name||p.name||"";
  if(alliance)alliance.value=c.alliance||"";
  if(alchemy)alchemy.value=c.alchemyLevel||50;
+ if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${aldrenJournalNote()}`;
 
- let note=aldrenJournalNote();
-
- let summary=document.getElementById("journalSummary");
- if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${note}`;
-
- let record=document.getElementById("characterRecordDisplay");
- if(record)record.innerHTML=`
-  <div><span class="small">Name</span><b>${c.name||p.name||"Adventurer"}</b></div>
-  <div><span class="small">Alliance</span><b>${c.alliance||"Alliance not recorded"}</b></div>
-  <div><span class="small">Alchemy Level</span><b>${c.alchemyLevel||50}</b></div>
- `;
-
- let prof=document.getElementById("professionSummary");
- if(prof)prof.innerHTML=`
-  <div class="professionCard">
-    <span class="professionIcon">??</span>
-    <b>Alchemy</b>
-    <span class="pill">Level ${c.alchemyLevel||50} / 50</span>
-  </div>
- `;
-
- let noteBox=document.getElementById("aldrenJournalNoteBox");
- if(noteBox)noteBox.textContent=note;
+let prof=document.getElementById("professionSummary");
+if(prof){
+prof.innerHTML=`
+<span class="pill">?? Alchemy</span>
+<span class="pill">Level ${c.alchemyLevel||50}/50</span>
+`;
+}
 }
 function saveJournal(){
  let p=profile();if(!p)return;ensureProfileShape();
@@ -79,18 +64,11 @@ function saveJournal(){
  archive.lastSaved=new Date().toISOString();
  p.lastOpen=new Date().toISOString();
  localStorage.setItem(SAVE_KEY,JSON.stringify(archive));
+ render();
  let editBox=document.getElementById("journalEditBox");
  if(editBox)editBox.style.display="none";
- render();
  alert("Aldren has updated your Character Journal.");
 }
-function toggleJournalEdit(){
- let box=document.getElementById("journalEditBox");
- if(!box)return;
- box.style.display=box.style.display==="none"?"block":"none";
- renderJournal();
-}
-
 function ensureReady(){if(!archive.profiles.length){setup.style.display="block";app.style.display="none";return false}setup.style.display="none";app.style.display="block";return true}
 function snapshot(){return JSON.stringify({archive})}function restore(s){archive=JSON.parse(s).archive}
 function common(c){let m={};c.forEach(r=>[...new Set(R[r])].forEach(t=>m[t]=(m[t]||0)+1));return Object.keys(m).filter(t=>m[t]>1)}
@@ -239,8 +217,43 @@ function toggleJournalEdit(){
  if(!box)return;
  box.style.display=box.style.display==="none"?"block":"none";
  renderJournal();
-}render();
+}
+// Sprint 7 Character Journal Overrides
+function renderJournal(){
+ let p=profile();if(!p)return;ensureProfileShape();
+ let c=p.character;
+ let name=document.getElementById("journalName"),alliance=document.getElementById("journalAlliance"),alchemy=document.getElementById("journalAlchemyLevel");
+ if(name)name.value=c.name||p.name||"";
+ if(alliance)alliance.value=c.alliance||"";
+ if(alchemy)alchemy.value=c.alchemyLevel||50;
 
+ let note=aldrenJournalNote();
+
+ let summary=document.getElementById("journalSummary");
+ if(summary)summary.innerHTML=`<span class=pill>${c.name||p.name||"Adventurer"}</span><span class=pill>${c.alliance||"Alliance not recorded"}</span><span class=pill>Alchemy ${c.alchemyLevel||50}</span><br><br>${note}`;
+
+ let record=document.getElementById("characterRecordDisplay");
+ if(record)record.innerHTML=`
+  <div><span class="small">Name</span><b>${c.name||p.name||"Adventurer"}</b></div>
+  <div><span class="small">Alliance</span><b>${c.alliance||"Alliance not recorded"}</b></div>
+  <div><span class="small">Alchemy Level</span><b>${c.alchemyLevel||50}</b></div>
+ `;
+
+ let prof=document.getElementById("professionSummary");
+ if(prof)prof.innerHTML=`
+  <div class="professionCard">
+    <span class="professionIcon">??</span>
+    <b>Alchemy</b>
+    <span class="pill">Level ${c.alchemyLevel||50} / 50</span>
+  </div>
+ `;
+
+ let noteBox=document.getElementById("aldrenJournalNoteBox");
+ if(noteBox)noteBox.textContent=note;
+}
+
+function showTab(id,btn){document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));btn.classList.add("active");if(id==="journal")renderJournal();renderBuilder()}
+render();
 
 
 

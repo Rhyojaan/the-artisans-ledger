@@ -118,8 +118,7 @@ Notes:</textarea>
     </div>
   </div>
 
-  <div class="card">
-    <h2>Edit Character Journal</h2>
+  <div id="journalEditBox" class="card journalEdit" style="display:none"><h2>Edit Character Journal</h2>
     <div class="controls">
       <input id="journalName" placeholder="Character name">
       <select id="journalAlliance">
@@ -131,9 +130,7 @@ Notes:</textarea>
       <input id="journalAlchemyLevel" type="number" min="1" max="50" value="50" placeholder="Alchemy level">
       <button onclick="saveJournal()">Save Journal</button>
     </div>
-  </div>
-</section>
-<section id="settings" class="panel">
+  </div><div class="controls" style="margin-top:14px"><button onclick="toggleJournalEdit()">Edit Journal</button></div></section><section id="settings" class="panel">
   <div class="card">
     <h2>Archive Settings</h2>
     <p class="small">Manage your characters here. Each archive keeps its own satchel, traits, favorites, and session stats.</p>
@@ -173,6 +170,7 @@ Notes:</textarea>
 <section id="saves" class="panel"><div class="card"><h2>Archive Tools</h2><div class="controls"><button onclick="exportSave()">Export Archive</button><button onclick="importSave()">Import Archive</button><button class="danger" onclick="resetAll()">Reset Everything</button></div><p class="small">Progress saves automatically in this browser.</p><div class="notice"><b>Release 5.4 — The Archivist</b><br>Removed green note styling, added Aldren Field Notes, added correction report template, added data audit, and added low-reserve reagent filtering.</div></div></section>
 </div></div>
 <script src="script.js"></script></body></html>
+
 
 
 
