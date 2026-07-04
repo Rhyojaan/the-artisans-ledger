@@ -772,3 +772,526 @@ body{
   margin-top:6px;
   color:var(--muted);
 }
+
+/* ==========================================================
+   Drive #1 - First Down
+   The Living Ledger - Open Book Layout
+   ========================================================== */
+
+.ledgerShell{
+
+    position:relative;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+
+    overflow:visible;
+
+}
+
+/* Whole open book */
+
+.ledgerShell::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(90deg,
+            #d5b77d 0%,
+            #e9d7aa 8%,
+            #f5e7bf 15%,
+            #f7edcb 50%,
+            #f5e7bf 85%,
+            #e3c88d 100%);
+
+    box-shadow:
+        0 35px 70px rgba(0,0,0,.45),
+        inset 0 0 60px rgba(115,82,33,.18);
+
+    z-index:-3;
+
+}
+
+/* Leather outside edge */
+
+.ledgerShell::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-34px;
+
+    border-radius:36px;
+
+    background:#3a2214;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,.55),
+        0 0 0 3px rgba(133,97,45,.55);
+
+    z-index:-4;
+
+}
+
+/* Center spine */
+
+.ledgerPages::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-18px;
+
+    top:-24px;
+
+    bottom:-24px;
+
+    width:36px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4d2f19,
+            #2a160d,
+            #140904,
+            #2a160d,
+            #4d2f19);
+
+    border-left:1px solid rgba(255,220,160,.22);
+
+    border-right:1px solid rgba(255,220,160,.22);
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.45);
+
+}
+
+/* Left page */
+
+.ledgerSidebar{
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f2e2b5,
+            #ebd7a5 55%,
+            #dfc790);
+
+    color:#4d3520;
+
+    border-right:none;
+
+    box-shadow:
+        inset -18px 0 28px rgba(0,0,0,.08);
+
+}
+
+/* Right page */
+
+.ledgerPages{
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f5e7bf,
+            #efddb0 60%,
+            #e4cb95);
+
+    color:#402a17;
+
+    box-shadow:
+        inset 18px 0 28px rgba(0,0,0,.08);
+
+}
+
+/* Make headings ink colored */
+
+.ledgerBrand,
+.ledgerVolume,
+.ledgerProfession,
+.ledgerContentsTitle{
+
+    color:#5b3518 !important;
+
+}
+
+/* Remove dark page backgrounds */
+
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+
+    background:rgba(255,250,236,.55);
+
+    color:#3c2615;
+
+    border-color:rgba(124,88,38,.35);
+
+    box-shadow:
+        inset 0 0 14px rgba(255,255,255,.25);
+
+}
+
+
+/* Drive #1 - First Down Correction: balanced open book pages */
+.ledgerShell{
+  grid-template-columns:minmax(360px, 44%) 1fr !important;
+  max-width:1400px;
+}
+
+.ledgerSidebar{
+  min-width:360px;
+  padding:34px 30px;
+}
+
+.ledgerPages{
+  min-height:760px;
+}
+
+.ledgerContents .tab{
+  max-width:100%;
+}
+
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+
+  .ledgerSidebar{
+    min-width:0;
+  }
+}
+
+/* Drive #1 - First Down: true two-page open book */
+body{
+  background:
+    radial-gradient(circle at center, rgba(90,50,22,.22), transparent 42%),
+    linear-gradient(180deg,#120905,#040201) !important;
+}
+
+.ledgerTop{
+  display:none !important;
+}
+
+.wrap{
+  max-width:none !important;
+}
+
+.ledgerShell{
+  width:min(1500px,94vw) !important;
+  margin:42px auto !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:0 !important;
+  position:relative !important;
+  border:none !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  overflow:visible !important;
+}
+
+/* leather cover underneath both pages */
+.ledgerShell::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:-38px !important;
+  border-radius:34px !important;
+  background:
+    radial-gradient(circle at center, rgba(172,112,42,.18), transparent 55%),
+    linear-gradient(180deg,#4b2715,#1b0c06) !important;
+  box-shadow:
+    0 38px 90px rgba(0,0,0,.75),
+    inset 0 0 55px rgba(0,0,0,.55),
+    0 0 0 3px rgba(150,105,42,.45) !important;
+  z-index:-5 !important;
+}
+
+/* parchment spread */
+.ledgerShell::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-18px !important;
+  border-radius:26px !important;
+  background:
+    linear-gradient(90deg,
+      #d1aa6c 0%,
+      #ead6aa 4%,
+      #f7e8bd 48%,
+      #b88a4d 50%,
+      #f8eac3 52%,
+      #ead6aa 96%,
+      #c69a5b 100%) !important;
+  box-shadow:
+    inset 0 0 45px rgba(111,75,27,.22),
+    0 18px 44px rgba(0,0,0,.45) !important;
+  z-index:-4 !important;
+}
+
+/* left page */
+.ledgerSidebar{
+  min-width:0 !important;
+  width:auto !important;
+  padding:46px 42px !important;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 25%),
+    linear-gradient(180deg,#f7e8bd,#ead3a0 70%,#ddbd78) !important;
+  color:#3e2714 !important;
+  border:none !important;
+  border-radius:22px 0 0 22px !important;
+  box-shadow:
+    inset -24px 0 42px rgba(66,38,12,.16),
+    inset 0 0 22px rgba(255,255,255,.24) !important;
+  min-height:780px !important;
+}
+
+/* right page */
+.ledgerPages{
+  padding:46px 42px !important;
+  min-height:780px !important;
+  position:relative !important;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,.28), transparent 25%),
+    linear-gradient(180deg,#f9ebc4,#efd9a7 70%,#e0c17d) !important;
+  color:#3e2714 !important;
+  border-radius:0 22px 22px 0 !important;
+  box-shadow:
+    inset 24px 0 42px rgba(66,38,12,.16),
+    inset 0 0 22px rgba(255,255,255,.22) !important;
+}
+
+/* center gutter */
+.ledgerPages::before{
+  content:"" !important;
+  position:absolute !important;
+  left:-22px !important;
+  top:-18px !important;
+  bottom:-18px !important;
+  width:44px !important;
+  background:
+    linear-gradient(90deg,
+      rgba(66,38,12,.35),
+      rgba(40,20,8,.7),
+      rgba(15,7,3,.9),
+      rgba(40,20,8,.7),
+      rgba(66,38,12,.35)) !important;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,.55),
+    0 0 22px rgba(0,0,0,.22) !important;
+  z-index:3 !important;
+  pointer-events:none !important;
+}
+
+/* left page typography */
+.ledgerBrand{
+  color:#5b3518 !important;
+  font-size:1.75rem !important;
+  text-align:center !important;
+  margin-top:6px !important;
+}
+
+.ledgerVolume,
+.ledgerProfession{
+  color:#6b4625 !important;
+  text-align:center !important;
+}
+
+.ledgerContentsTitle{
+  color:#5b3518 !important;
+  text-align:center !important;
+  margin-top:28px !important;
+  font-size:.95rem !important;
+}
+
+/* table of contents as printed entries, not sidebar buttons */
+.ledgerContents{
+  margin-top:20px !important;
+  gap:10px !important;
+}
+
+.ledgerContents .tab{
+  background:rgba(255,248,220,.45) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.32) !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  border-radius:8px !important;
+  padding:12px 14px 12px 28px !important;
+}
+
+.ledgerContents .tab.active{
+  background:rgba(123,76,25,.18) !important;
+  color:#2c1708 !important;
+  border-color:rgba(115,75,30,.65) !important;
+  box-shadow:inset 0 0 12px rgba(111,75,27,.12) !important;
+}
+
+.ledgerContents .tab:hover{
+  transform:translateX(4px) !important;
+}
+
+.ledgerContents .tab::before{
+  background:#6b4625 !important;
+}
+
+/* make right-page content inherit parchment feel */
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+  background:rgba(255,250,232,.58) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.28) !important;
+  box-shadow:inset 0 0 14px rgba(255,255,255,.24) !important;
+}
+
+.ledgerPages h2,
+.ledgerPages h3,
+.ledgerPages .journalTitle,
+.ledgerPages .journalPanel h3{
+  color:#5b3518 !important;
+}
+
+/* mobile stacks like pages */
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+  .ledgerSidebar,
+  .ledgerPages{
+    border-radius:18px !important;
+    min-height:auto !important;
+  }
+  .ledgerPages::before{
+    display:none !important;
+  }
+}
+
+/* Drive #1 Reset - Aldren's Workbench Layout */
+.ledgerShell{
+  width:min(1380px,94vw) !important;
+  margin:42px auto !important;
+  display:grid !important;
+  grid-template-columns:300px 1fr !important;
+  gap:22px !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+
+.ledgerShell::before,
+.ledgerShell::after,
+.ledgerPages::before{
+  display:none !important;
+}
+
+.ledgerSidebar{
+  min-width:0 !important;
+  min-height:760px !important;
+  padding:28px 22px !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(circle at top, rgba(221,176,78,.13), transparent 32%),
+    linear-gradient(180deg,#3a2214,#160b06) !important;
+  border:1px solid rgba(221,176,78,.5) !important;
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.58),
+    inset 0 0 38px rgba(0,0,0,.35) !important;
+  color:var(--text) !important;
+}
+
+.ledgerPages{
+  min-height:760px !important;
+  padding:34px !important;
+  border-radius:24px !important;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 26%),
+    linear-gradient(180deg,#f7e7bc,#ead2a0 72%,#d6b16f) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(121,78,29,.5) !important;
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.55),
+    inset 0 0 35px rgba(255,255,255,.25),
+    inset 0 0 70px rgba(92,57,18,.12) !important;
+}
+
+.ledgerBrand{
+  color:var(--gold) !important;
+  text-align:center !important;
+  font-size:1.5rem !important;
+}
+
+.ledgerVolume,
+.ledgerProfession{
+  text-align:center !important;
+  color:var(--muted) !important;
+}
+
+.ledgerContentsTitle{
+  margin-top:26px !important;
+  text-align:center !important;
+  color:var(--gold) !important;
+  letter-spacing:2px !important;
+}
+
+.ledgerContentsTitle::before{
+  content:"The Index";
+}
+
+.ledgerContentsTitle{
+  font-size:0 !important;
+}
+
+.ledgerContentsTitle::before{
+  font-size:.9rem !important;
+}
+
+.ledgerContents .tab{
+  background:rgba(0,0,0,.2) !important;
+  color:var(--text) !important;
+  border:1px solid rgba(221,176,78,.34) !important;
+  border-radius:12px !important;
+  box-shadow:inset 0 0 12px rgba(0,0,0,.22) !important;
+  text-shadow:none !important;
+}
+
+.ledgerContents .tab.active{
+  background:linear-gradient(90deg, rgba(221,176,78,.28), rgba(0,0,0,.18)) !important;
+  border-color:rgba(221,176,78,.75) !important;
+  color:var(--gold) !important;
+}
+
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+  background:rgba(255,250,232,.62) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.28) !important;
+}
+
+.ledgerPages h2,
+.ledgerPages h3,
+.ledgerPages .journalTitle,
+.ledgerPages .journalPanel h3{
+  color:#5b3518 !important;
+}
+
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+}
