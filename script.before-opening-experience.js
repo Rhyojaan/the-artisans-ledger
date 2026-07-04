@@ -285,46 +285,4 @@ function toggleJournalEdit(){
  if(gate)gate.classList.add("tomeOpening");
  setTimeout(()=>{if(gate)gate.style.display="none";},650);
 }
-
-// Opening Experience
-function openLedger(){
- let gate=document.getElementById("tomeGate");
- if(!gate)return;
- gate.classList.add("openingLedger");
- setTimeout(()=>{
-  gate.style.display="none";
-  showCharacterGate();
- },1900);
-}
-
-function showCharacterGate(){
- let gate=document.getElementById("characterGate");
- let list=document.getElementById("characterGateList");
- if(!gate||!list)return;
-
- if(!archive.profiles.length){
-  gate.style.display="none";
-  render();
-  return;
- }
-
- list.innerHTML=archive.profiles.map(p=>`
-  <button class="characterLedgerChoice" onclick="chooseLedgerCharacter('${p.id}')">
-    <b>${p.name}</b>
-    <span>Open this ledger</span>
-  </button>
- `).join("");
-
- gate.style.display="flex";
-}
-
-function chooseLedgerCharacter(id){
- archive.activeProfile=id;
- localStorage.setItem(SAVE_KEY,JSON.stringify(archive));
- let gate=document.getElementById("characterGate");
- if(gate)gate.style.display="none";
- render();
- let first=document.querySelector(".tab");
- if(first)showTab("advisor",first);
-}
 render();
