@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Artisan's Ledger</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="tomeGate" class="tomeGate">
+  <div class="studyGlow"></div>
+  <div class="studyTable">
+    <button class="ledgerTome" type="button" aria-label="Open The Artisan's Ledger" onclick="openLedger()">
+      <span class="tomeCover"></span>
+    </button>
+  </div>
+</div>
+
+<header class="ledgerTop">
+  <h1>The Artisan's Ledger</h1>
+  <div class="small">Volume I � Alchemy � Maintained by Aldren the Archivist</div>
+</header>
+<div class="wrap">
+<div id="setup" class="card titlecard" style="display:none">
+<h1>⚗️ The Artisan's Ledger</h1><p class="quote">“Knowledge, once recorded, is never truly lost.”</p><p class="small">— Aldren the Archivist</p>
+<h2>Before we begin...</h2><p>What shall Aldren call you?</p><div class="controls" style="justify-content:center"><input id="profileName" placeholder="Your character name"><button onclick="createFirstProfile()">Begin Archive</button></div>
+</div>
+<div id="app" style="display:none">
+<div class="card advisor"><h2 id="welcomeLine">Welcome back.</h2><div id="greetingBox" class="recipe"></div></div>
+<div class="topgrid"><div class="card"><div class="small">Traits Recorded</div><div id="traitStat" class="stat">0/0</div></div><div class="card"><div class="small">Reagents Complete</div><div id="ingStat" class="stat">0/0</div></div><div class="card"><div class="small">Reagents Owned</div><div id="ownedStat" class="stat">0</div></div><div class="card"><div class="small">Useful Experiments</div><div id="craftStat" class="stat">0</div></div></div>
+<div class="card"><div class="row"><b>Archive Progress</b><b id="pct">0%</b></div><div class="bar"><div id="fill" class="fill"></div></div><div id="remainingText" class="small" style="margin-top:8px"></div></div>
+<div class="ledgerShell">
+  <aside class="ledgerSidebar">
+    <div class="ledgerBrand">The Artisan's Ledger</div>
+    <div class="ledgerVolume">Volume I</div>
+    <div class="ledgerProfession">Alchemy</div>
+    <div class="ledgerDivider"></div>
+    <div class="ledgerContentsTitle">Contents</div>
+    <nav class="tabs ledgerContents">
+<button class="tab active" onclick="showTab('advisor',this)">Aldren</button><button class="tab" onclick="showTab('plan',this)">Completion Plan</button><button class="tab" onclick="showTab('ingredients',this)">Reagents</button><button class="tab" onclick="showTab('builder',this)">Laboratory</button><button class="tab" onclick="showTab('session',this)">Session</button><button class="tab" onclick="showTab('verification',this)">Archive Verification</button><button class="tab" onclick="showTab('journal',this)">Character Journal</button><button class="tab" onclick="showTab('settings',this)">Settings</button><button class="tab" onclick="showTab('saves',this)">Saves</button>
+    </nav>
+  </aside>
+
+  <main class="ledgerPages">
+<section id="advisor" class="panel active"><div class="card advisor"><h2>Aldren's Recommendation</h2><div id="advisorText" class="recipe"></div><div class="controls" style="margin-top:12px"><button class="good" onclick="markBest()">Crafted it — record discovery</button><button class="secondary" onclick="undoLast()">Undo Last Craft</button><button class="secondary" onclick="inventoryOnly=!inventoryOnly;render()">Craftable-only: <span id="invMode">OFF</span></button><button class="secondary" onclick="togglePlayMode()">Game Mode</button></div></div><div class="card"><h2>Next 5 Experiments</h2><div id="nextFive"></div></div>
+  <div class="card advisor">
+    <h2>Inventory Report</h2>
+    <div id="aldrenInventoryAlert" class="recipe"></div>
+  </div>
+  <div class="card advisor">
+    <h2>Field Note</h2>
+    <div id="fieldNote" class="recipe"></div>
+  </div>
+</section>
+<section id="plan" class="panel"><div class="card"><h2>Completion Plan</h2><p class="small">Aldren calculates a practical path from your current archive.</p><div class="controls"><button onclick="buildPlan()">Calculate Plan</button><button class="secondary" onclick="inventoryOnly=!inventoryOnly;buildPlan();render()">Craftable-only: <span id="invMode2">OFF</span></button></div><div id="planSummary" class="notice">Click Calculate Plan.</div><div id="planList"></div></div></section>
+<section id="ingredients" class="panel"><div class="card"><div class="controls"><input id="search" placeholder="Search reagent or trait..." oninput="render()"><select id="filter" onchange="render()"><option value="all">Show all</option><option value="favorites">Favorites only</option><option value="incomplete">Only incomplete</option><option value="complete">Only complete</option><option value="owned">Only reagents I own</option><option value="low">Only below reserve</option></select><button onclick="markOwnedFirstTrait()">Mark first trait for owned</button></div></div><h2 style="margin-top:18px">Solvents</h2><p class="small">Track potion waters and poison solvents here. The Laboratory uses these counts when checking craftability.</p><div id="solventList" class="solventGrid"></div><h2 style="margin-top:18px">Reagent Ledger</h2><div id="list" class="grid"></div></section>
+<section id="builder" class="panel"><div class="card"><h2>Laboratory</h2><p class="small">Pick one or more effects. Aldren lists mixtures that share all selected effects.</p><div id="effects" class="effectList"></div></div><div class="card"><h2>Matching Recipes</h2><div id="recipes"></div></div></section>
+<section id="session" class="panel"><div class="card"><h2>Today's Session</h2><div class="topgrid"><div><div class="small">Crafts Recorded</div><div id="sessionCrafts" class="stat">0</div></div><div><div class="small">Traits Learned</div><div id="sessionTraits" class="stat">0</div></div><div><div class="small">Reagents Completed</div><div id="sessionComplete" class="stat">0</div></div></div><div class="controls" style="margin-top:14px"><button class="danger" onclick="resetSession()">Reset Session Stats</button></div></div><div class="card"><h2>Achievements</h2><div id="achievements"></div></div></section>
+
+
+<section id="verification" class="panel">
+  <div class="card">
+    <h2>Archivist's Ledger</h2>
+    <p class="small">Aldren keeps this ledger so the reagent archive can be checked against ESO's in-game tooltips.</p>
+    <div class="topgrid">
+      <div><div class="small">Reagents in Archive</div><div id="verifyReagents" class="stat">0</div></div>
+      <div><div class="small">Trait Entries</div><div id="verifyTraits" class="stat">0</div></div>
+      <div><div class="small">Status</div><div class="stat">5.1</div></div>
+    </div>
+    <div class="notice">
+      Aldren's note: if you find a trait name or order that does not match ESO, record the reagent name and the correct 1-4 order. We will patch it in the next release.
+    </div>
+  </div>
+  <div class="card">
+    <h2>Verified Field Notes</h2>
+    <div class="pill">Spider Egg order corrected</div>
+    <div class="pill">Water Hyacinth Critical / Weapon Critical corrected</div>
+    <div class="pill">Crimson Nirnroot uses Critical</div>
+    <div class="pill">Reserve controls stabilized</div>
+    <div class="pill">Profile archives separated</div>
+  </div>
+  <div class="card">
+    <h2>Data Audit</h2>
+    <div id="dataAudit" class="recipe"></div>
+  </div>
+  <div class="card">
+    <h2>Correction History</h2>
+    <div class="pill">Spider Egg order corrected</div>
+    <div class="pill">Water Hyacinth slot 3 corrected to Weapon Critical</div>
+    <div class="pill">Crimson Nirnroot uses Critical</div>
+  </div>
+  <div class="card">
+    <h2>Report a Correction</h2>
+    <p class="small">Copy this template and send it with a screenshot if possible.</p>
+    <textarea id="correctionTemplate" style="width:100%;min-height:150px;background:#0d0905;color:var(--text);border:1px solid var(--gold2);border-radius:10px;padding:12px">Correction Report
+
+Reagent:
+Trait slot number:
+App says:
+ESO says:
+Screenshot attached? Yes / No
+Notes:</textarea>
+    <div class="controls" style="margin-top:10px">
+      <button onclick="copyCorrectionTemplate()">Copy Template</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Reagent Ledger</h2>
+    <div id="verificationList" class="grid"></div>
+  </div>
+</section>
+
+<section id="journal" class="panel">
+  <div class="journalBook">
+
+    <div class="journalHero">
+      <div class="journalBookIcon">BOOK</div>
+      <div>
+        <div class="journalTitle">Aldren's Character Journal</div>
+        <div class="journalSubtitle">Maintained for <span id="journalHeaderName"></span></div>
+      </div>
+      <div class="journalUpdated">Last Updated: <span id="journalLastUpdated"></span></div>
+    </div>
+
+    <div id="journalSummary" class="journalIntro"></div>
+
+    <div class="journalMainGrid">
+      <div class="journalPanel">
+        <h3>Character Record</h3>
+        <div id="characterRecordDisplay" class="journalRecord"></div>
+      </div>
+
+      <div class="journalPanel">
+        <h3>Professions</h3>
+        <div id="professionSummary" class="journalProfession"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journalSeal">
+      <div class="sealDivider"></div>
+      <div class="sealEmblem">
+        <div class="sealIcon">A</div>
+        <div class="sealWord">ALDREN</div>
+        <div class="sealWordSmall">ARCHIVE</div>
+      </div>
+      <div class="sealSignature">Recorded faithfully by</div>
+      <div class="sealName">Aldren the Archivist</div>
+      <div class="sealTitle">Keeper of the Alchemical Archive</div>
+      <div class="sealDate"><span id="journalSealDate"></span></div>
+    </div>
+
+  </div>
+
+  <div id="journalEditBox" class="card journalEdit" style="display:none">
+    <h2>Edit Character Journal</h2>
+    <div class="controls">
+      <input id="journalName" placeholder="Character name">
+      <select id="journalAlliance">
+        <option value="">Alliance not recorded</option>
+        <option value="Aldmeri Dominion">Aldmeri Dominion</option>
+        <option value="Daggerfall Covenant">Daggerfall Covenant</option>
+        <option value="Ebonheart Pact">Ebonheart Pact</option>
+      </select>
+      <input id="journalAlchemyLevel" type="number" min="1" max="50" value="50" placeholder="Alchemy level">
+      <button onclick="saveJournal()">Save Journal</button>
+    </div>
+  </div>
+
+  <div class="controls" style="margin-top:14px">
+    <button onclick="toggleJournalEdit()">Edit Journal</button>
+  </div>
+</section>
+<section id="settings" class="panel">
+  <div class="card">
+    <h2>Archive Settings</h2>
+    <p class="small">Manage your characters here. Each archive keeps its own satchel, traits, favorites, and session stats.</p>
+    <h3>Current Archive</h3>
+    <div id="currentArchiveBox" class="notice"></div>
+  </div>
+
+  <div class="card">
+    <h2>Switch Archive</h2>
+    <div id="profileButtons" class="controls" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <h2>Rename Current Archive</h2>
+    <div class="controls">
+      <input id="renameProfileName" placeholder="New name for current archive">
+      <button onclick="renameActiveProfile()">Rename Archive</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Create New Archive</h2>
+    <div class="controls">
+      <input id="newProfileName" placeholder="New character name">
+      <button onclick="addProfile()">Add Archive</button>
+    </div>
+  </div>
+
+  
+  <div class="card">
+    <h2>Danger Zone</h2>
+    <p class="small">Deleting an archive cannot be undone unless you exported a backup first.</p>
+    <button class="danger" onclick="deleteActiveProfile()">Delete Current Archive</button>
+  </div>
+</section>
+
+<section id="saves" class="panel"><div class="card"><h2>Archive Tools</h2><div class="controls"><button onclick="exportSave()">Export Archive</button><button onclick="importSave()">Import Archive</button><button class="danger" onclick="resetAll()">Reset Everything</button></div><p class="small">Progress saves automatically in this browser.</p><div class="notice"><b>Release 5.4 — The Archivist</b><br>Removed green note styling, added Aldren Field Notes, added correction report template, added data audit, and added low-reserve reagent filtering.</div></div></section>
+  </main>
+</div>
+</div></div>
+<script src="script.js"></script></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2055 @@
+
+:root{--bg:#090603;--panel:#1b130b;--panel2:#2b1e11;--gold:#ddb04e;--gold2:#8b642a;--text:#f8ecd2;--muted:#cbb98d;--green:#6fc77a;--yellow:#d7aa47;--red:#bd5d53}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#2f1f0e 0,#090603 60%);color:var(--text);font-family:Arial,system-ui,sans-serif;font-size:18px}
+header{position:sticky;top:0;z-index:10;background:#120c06ee;border-bottom:2px solid var(--gold2);padding:16px 18px}
+h1{margin:0;color:var(--gold);font-size:34px}h2{color:var(--gold);margin:0 0 12px;font-size:26px}h3{margin:0 0 10px;color:#ffe1a4;font-size:22px}
+.wrap{max-width:1280px;margin:auto;padding:16px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--gold2);border-radius:17px;padding:18px;margin:14px 0;box-shadow:0 10px 26px #0009}
+.topgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:14px}
+.stat{font-size:34px;color:var(--gold);font-weight:900}.small{color:var(--muted);font-size:15px}
+input,button,select{background:#0d0905;color:var(--text);border:1px solid var(--gold2);border-radius:11px;padding:12px;font-size:18px}
+button{cursor:pointer;color:#ffdc8c;font-weight:800;background:linear-gradient(#4c3518,#281b0c)}button.secondary{background:#130e08;color:var(--muted)}button.danger{border-color:#8c3d35;color:#ffd0c9}button.good{border-color:#468a4b;color:#dcffdf}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.controls input{min-width:300px;flex:1}
+.bar{height:22px;background:#090704;border-radius:999px;overflow:hidden;border:1px solid var(--gold2)}.fill{height:100%;background:linear-gradient(90deg,#8d6727,#e6bd5a);width:0;transition:width .4s}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center}.recipe{font-size:22px;line-height:1.6}
+.pill{display:inline-block;border:1px solid var(--gold2);border-radius:999px;padding:6px 11px;margin:4px;color:var(--muted);font-size:15px}
+.trait{display:flex;gap:10px;align-items:center;margin:8px 0;padding:7px;border-radius:9px}.trait input{width:24px;height:24px}
+.done{border-color:var(--green)}.partial{border-color:var(--yellow)}.none{border-color:var(--red)}.fav{box-shadow:0 0 0 2px #d9aa4933}
+.qty{width:78px;text-align:center}.qtyBtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.qtyBtns button{padding:8px 10px;font-size:15px}
+.badge{font-size:14px;border-radius:999px;padding:5px 9px;border:1px solid var(--gold2);color:var(--muted)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tab.active{outline:2px solid var(--gold);color:#fff}.panel{display:none}.panel.active{display:block}.advisor{border-left:5px solid var(--gold)}
+.effectList{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:8px}.effectItem{border:1px solid var(--gold2);border-radius:10px;padding:9px;background:#100b06}.solventGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.recipeLine{display:block;border:1px solid var(--gold2);border-radius:10px;padding:10px;margin:8px 0;background:#100b06}
+.planStep{border:1px solid var(--gold2);border-radius:12px;padding:12px;margin:8px 0;background:#110c07}
+mark{background:#5c4117;color:#ffe7aa;border-radius:4px;padding:1px 5px}.notice{border:1px solid var(--gold2);background:#100b06;border-radius:12px;padding:12px;margin-top:10px;color:var(--text)}
+body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,body.playing input,body.playing select{font-size:22px;padding:15px}body.playing h1{font-size:40px}
+.titlecard{text-align:center;padding:28px}.quote{font-style:italic;color:#edd28d;font-size:20px}
+@media(max-width:700px){body{font-size:16px}h1{font-size:26px}.controls>*{width:100%}.controls input{min-width:0}.row{align-items:flex-start;flex-direction:column}}
+
+
+/* Character Journal */
+#journal .controls input,
+#journal .controls select{
+  min-width:220px;
+}
+#journalSummary{
+  margin-top:12px;
+}
+
+/* Sprint 14 - Book style Character Journal */
+#journal .journalBook{
+  background:
+    radial-gradient(circle at top left, rgba(221,176,78,.10), transparent 28%),
+    linear-gradient(180deg, rgba(37,28,17,.98), rgba(11,8,5,.98));
+  border:1px solid rgba(221,176,78,.55);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 0 28px rgba(0,0,0,.55), inset 0 0 55px rgba(0,0,0,.35);
+}
+
+#journal .journalHero{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:18px;
+  align-items:center;
+  border-bottom:1px solid rgba(221,176,78,.4);
+  padding-bottom:18px;
+  margin-bottom:22px;
+}
+
+#journal .journalBookIcon{
+  border:1px solid rgba(221,176,78,.5);
+  border-radius:10px;
+  padding:10px 12px;
+  color:var(--gold);
+  font-size:.75rem;
+  letter-spacing:2px;
+}
+
+#journal .journalTitle{
+  font-size:2rem;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--gold);
+}
+
+#journal .journalSubtitle,
+#journal .journalUpdated{
+  color:var(--text);
+  opacity:.9;
+}
+
+#journal .journalIntro{
+  font-size:1.25rem;
+  margin:10px 0 26px;
+  color:var(--text);
+}
+
+#journal .journalMainGrid{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:22px;
+}
+
+#journal .journalThreeGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:22px;
+}
+
+#journal .journalPanel{
+  border:1px solid rgba(221,176,78,.5);
+  border-radius:14px;
+  padding:20px;
+  background:linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.34));
+  box-shadow:inset 0 0 22px rgba(0,0,0,.3);
+}
+
+#journal .journalPanel h3{
+  margin-top:0;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--gold);
+  border-bottom:1px solid rgba(221,176,78,.35);
+  padding-bottom:10px;
+}
+
+#journal .journalRecord{
+  display:block;
+}
+
+#journal .journalRecord div{
+  border:0;
+  border-bottom:1px solid rgba(221,176,78,.28);
+  border-radius:0;
+  background:transparent;
+  padding:14px 0;
+  box-shadow:none;
+}
+
+#journal .journalRecord div:last-child{
+  border-bottom:0;
+}
+
+#journal .journalRecord b{
+  font-size:1.35rem;
+  color:var(--text);
+}
+
+#journal .journalRecord .small{
+  color:var(--gold);
+  text-transform:none;
+  letter-spacing:.5px;
+  font-size:.9rem;
+}
+
+#journal .professionCard{
+  border:0;
+  border-bottom:1px solid rgba(221,176,78,.35);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  padding:10px 0 18px;
+}
+
+#journal .professionIcon{
+  border:1px solid rgba(221,176,78,.4);
+  border-radius:50%;
+  width:46px;
+  height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#journal .futureProfessionList{
+  margin-top:14px;
+}
+
+#journal .futureProfessionList div{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:8px 0;
+  color:var(--muted);
+}
+
+#journal .futureProfessionList span{
+  font-style:italic;
+  opacity:.75;
+}
+
+#journal .emptyJournalBox{
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:var(--text);
+  opacity:.9;
+  line-height:1.5;
+}
+
+#journal .emptyJournalBox span{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+#journal .journalSeal{
+  margin-top:46px;
+  text-align:center;
+}
+
+#journal .sealDivider{
+  height:1px;
+  width:70%;
+  margin:0 auto 28px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+#journal .sealEmblem{
+  width:150px;
+  height:150px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  border:4px double var(--gold);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 35% 25%, rgba(255,255,255,.08), rgba(0,0,0,.35));
+  box-shadow:0 0 22px rgba(0,0,0,.55), inset 0 0 24px rgba(0,0,0,.35);
+}
+
+#journal .sealIcon{
+  font-size:2.3rem;
+  color:var(--gold);
+  font-weight:bold;
+}
+
+#journal .sealWord{
+  color:var(--gold);
+  font-size:1.35rem;
+  letter-spacing:2px;
+}
+
+#journal .sealWordSmall{
+  font-size:.85rem;
+  letter-spacing:4px;
+  opacity:.8;
+}
+
+#journal .sealSignature{
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:.8rem;
+}
+
+#journal .sealName{
+  color:var(--gold);
+  font-size:1.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-top:6px;
+}
+
+#journal .sealTitle,
+#journal .sealDate{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+@media(max-width:900px){
+  #journal .journalHero,
+  #journal .journalMainGrid,
+  #journal .journalThreeGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* Journal typography alignment */
+#journal{
+  font-family:inherit;
+}
+
+#journal .journalTitle,
+#journal .journalPanel h3,
+#journal .sealName,
+#journal .sealWord{
+  font-family:inherit;
+}
+
+#journal .journalTitle{
+  letter-spacing:1px;
+  text-transform:none;
+}
+
+#journal .journalPanel h3{
+  letter-spacing:1px;
+  text-transform:none;
+}
+
+/* Edit Journal book styling */
+#journal .journalEdit{
+  margin-top:22px;
+  border:1px solid rgba(221,176,78,.5);
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(43,30,17,.95), rgba(12,8,5,.95));
+  box-shadow:inset 0 0 24px rgba(0,0,0,.3);
+}
+
+#journal .journalEdit h2{
+  color:var(--gold);
+}
+
+#journal .journalEdit input,
+#journal .journalEdit select{
+  border:1px solid rgba(221,176,78,.55);
+  background:rgba(0,0,0,.25);
+}
+
+/* Ledger Shell - Book/Table of Contents Layout */
+body{
+  background:
+    radial-gradient(circle at top left, rgba(221,176,78,.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(130,72,28,.12), transparent 30%),
+    #090604;
+}
+
+.ledgerTop{
+  max-width:1280px;
+  margin:18px auto 0;
+  padding:18px 24px;
+  border:1px solid rgba(221,176,78,.45);
+  border-radius:18px 18px 0 0;
+  background:linear-gradient(180deg, rgba(43,30,17,.96), rgba(13,9,5,.96));
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+
+.ledgerTop h1{
+  margin:0;
+  color:var(--gold);
+  letter-spacing:1px;
+}
+
+.ledgerShell{
+  max-width:1280px;
+  margin:0 auto 28px;
+  display:grid;
+  grid-template-columns:270px 1fr;
+  gap:0;
+  border:1px solid rgba(221,176,78,.45);
+  border-top:0;
+  border-radius:0 0 18px 18px;
+  overflow:hidden;
+  box-shadow:0 20px 45px rgba(0,0,0,.55);
+}
+
+.ledgerSidebar{
+  padding:24px 18px;
+  background:
+    linear-gradient(180deg, rgba(38,27,17,.98), rgba(10,7,4,.98));
+  border-right:1px solid rgba(221,176,78,.4);
+}
+
+.ledgerBrand{
+  color:var(--gold);
+  font-size:1.35rem;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.ledgerVolume{
+  margin-top:14px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:.78rem;
+}
+
+.ledgerProfession{
+  margin-top:4px;
+  color:var(--text);
+  font-size:1.15rem;
+}
+
+.ledgerDivider{
+  height:1px;
+  margin:20px 0;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+.ledgerContentsTitle{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:.8rem;
+  margin-bottom:12px;
+}
+
+.ledgerContents{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.ledgerContents .tab{
+  width:100%;
+  text-align:left;
+  justify-content:flex-start;
+  border-radius:10px;
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(221,176,78,.28);
+}
+
+.ledgerContents .tab.active{
+  background:linear-gradient(90deg, rgba(221,176,78,.22), rgba(0,0,0,.18));
+  border-color:rgba(221,176,78,.65);
+}
+
+.ledgerPages{
+  padding:24px;
+  background:
+    radial-gradient(circle at top, rgba(221,176,78,.06), transparent 36%),
+    linear-gradient(180deg, rgba(23,16,9,.98), rgba(9,6,4,.98));
+  min-height:720px;
+}
+
+.ledgerPages .panel{
+  margin:0;
+}
+
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr;
+  }
+
+  .ledgerSidebar{
+    border-right:0;
+    border-bottom:1px solid rgba(221,176,78,.4);
+  }
+
+  .ledgerContents{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  }
+}
+
+/* Chapter transition system */
+.panel.chapterLeaving{
+  animation:chapterLeave .18s ease forwards;
+}
+
+.panel.chapterEntering{
+  animation:chapterEnter .26s ease forwards;
+}
+
+@keyframes chapterLeave{
+  from{
+    opacity:1;
+    transform:translateX(0) rotateY(0deg);
+  }
+  to{
+    opacity:0;
+    transform:translateX(-18px) rotateY(-4deg);
+  }
+}
+
+@keyframes chapterEnter{
+  from{
+    opacity:0;
+    transform:translateX(22px) rotateY(4deg);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0) rotateY(0deg);
+  }
+}
+
+.ledgerContents .tab{
+  outline:none !important;
+}
+
+.ledgerContents .tab:focus{
+  outline:none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -3px 8px rgba(0,0,0,.35),
+    0 4px 10px rgba(0,0,0,.35);
+}
+
+.ledgerContents .tab:hover{
+  transform:translateX(6px) !important;
+}
+
+/* Tome Gate */
+.tomeGate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:
+    radial-gradient(circle at center, rgba(221,176,78,.12), transparent 35%),
+    linear-gradient(180deg,#120b06,#050302);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.tomeTable{
+  width:min(760px,90vw);
+  height:min(460px,70vh);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at center, rgba(80,45,22,.9), rgba(20,10,5,.98));
+  box-shadow:0 30px 80px rgba(0,0,0,.75), inset 0 0 80px rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.closedTome{
+  width:min(430px,75vw);
+  height:280px;
+  border-radius:18px;
+  background:
+    linear-gradient(90deg, rgba(30,15,8,.55), transparent 12%, transparent 88%, rgba(30,15,8,.55)),
+    linear-gradient(180deg,#5b2c18,#2b130b);
+  border:3px solid rgba(221,176,78,.55);
+  box-shadow:0 22px 45px rgba(0,0,0,.7), inset 0 0 35px rgba(0,0,0,.45);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .35s ease, filter .35s ease;
+}
+
+.closedTome:hover{
+  transform:translateY(-6px) scale(1.02);
+  filter:brightness(1.08);
+}
+
+.tomeStrap{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:54px;
+  background:linear-gradient(180deg,#2b170d,#120805);
+  border-left:1px solid rgba(221,176,78,.35);
+  border-right:1px solid rgba(221,176,78,.35);
+}
+
+.tomeTitle{
+  z-index:1;
+  color:var(--gold);
+  font-size:2rem;
+  font-weight:bold;
+  text-align:center;
+  letter-spacing:1px;
+  text-shadow:0 3px 10px rgba(0,0,0,.8);
+}
+
+.tomeHint{
+  z-index:1;
+  margin-top:18px;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.tomeOpening{
+  animation:tomeGateOpen .65s ease forwards;
+}
+
+@keyframes tomeGateOpen{
+  from{opacity:1;transform:scale(1);}
+  to{opacity:0;transform:scale(1.08);}
+}
+
+/* Tome Gate Upgrade */
+.tomeGate{
+  perspective:1400px;
+}
+
+.bookScene{
+  position:relative;
+  width:min(620px,88vw);
+  height:390px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bookShadow{
+  position:absolute;
+  width:520px;
+  height:90px;
+  bottom:30px;
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  filter:blur(22px);
+}
+
+.closedTome{
+  width:min(500px,82vw);
+  height:320px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 72% 24%, rgba(255,220,135,.14), transparent 10%),
+    linear-gradient(90deg, rgba(10,4,2,.55), transparent 16%, transparent 88%, rgba(10,4,2,.5)),
+    linear-gradient(180deg,#6b321a,#351409 55%,#180704);
+  border:4px solid rgba(222,178,83,.75);
+  position:relative;
+  transform-style:preserve-3d;
+  box-shadow:
+    0 30px 65px rgba(0,0,0,.82),
+    inset 0 0 45px rgba(0,0,0,.55),
+    inset 0 0 0 2px rgba(255,220,150,.12);
+}
+
+.bookSpine{
+  position:absolute;
+  left:34px;
+  top:0;
+  bottom:0;
+  width:72px;
+  background:linear-gradient(180deg,#2a1109,#130603);
+  border-left:1px solid rgba(255,220,150,.28);
+  border-right:2px solid rgba(222,178,83,.45);
+  box-shadow:inset -10px 0 20px rgba(0,0,0,.45);
+}
+
+.bookCorner{
+  position:absolute;
+  width:46px;
+  height:46px;
+  border:3px double rgba(222,178,83,.9);
+}
+
+.bookCorner.topLeft{left:14px;top:14px;border-right:0;border-bottom:0}
+.bookCorner.topRight{right:14px;top:14px;border-left:0;border-bottom:0}
+.bookCorner.bottomLeft{left:14px;bottom:14px;border-right:0;border-top:0}
+.bookCorner.bottomRight{right:14px;bottom:14px;border-left:0;border-top:0}
+
+.bookGem{
+  position:absolute;
+  top:42px;
+  left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:34px;
+  height:34px;
+  background:linear-gradient(135deg,#d5a93d,#6b1e12);
+  border:2px solid rgba(255,230,170,.8);
+  box-shadow:0 0 18px rgba(222,178,83,.45);
+}
+
+.closedTome .tomeTitle{
+  position:relative;
+  z-index:2;
+  margin-top:76px;
+  font-size:2.2rem;
+}
+
+.tomeSubtitle{
+  position:relative;
+  z-index:2;
+  margin-top:10px;
+  color:var(--text);
+  opacity:.85;
+}
+
+.closedTome .tomeHint{
+  position:relative;
+  z-index:2;
+  margin-top:52px;
+}
+
+.openingBook{
+  display:none;
+  position:absolute;
+  width:560px;
+  height:340px;
+  transform-style:preserve-3d;
+}
+
+.leftPage,.rightPage{
+  position:absolute;
+  top:0;
+  width:50%;
+  height:100%;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.18), transparent 18%),
+    linear-gradient(180deg,#d8bd7b,#9f7c41);
+  border:2px solid rgba(80,48,18,.8);
+  box-shadow:inset 0 0 35px rgba(0,0,0,.18);
+}
+
+.leftPage{
+  left:0;
+  border-radius:18px 4px 4px 18px;
+  transform-origin:right center;
+}
+
+.rightPage{
+  right:0;
+  border-radius:4px 18px 18px 4px;
+  transform-origin:left center;
+}
+
+.tomeOpening .closedTome{
+  animation:bookCoverOpen 1.2s ease forwards;
+}
+
+.tomeOpening .openingBook{
+  display:block;
+  animation:bookPagesAppear 1.35s ease forwards;
+}
+
+@keyframes bookCoverOpen{
+  0%{opacity:1;transform:rotateX(0) scale(1)}
+  35%{opacity:1;transform:rotateX(8deg) scale(1.03)}
+  100%{opacity:0;transform:rotateX(18deg) scale(1.08)}
+}
+
+@keyframes bookPagesAppear{
+  0%{opacity:0;transform:scale(.92)}
+  35%{opacity:0}
+  60%{opacity:1;transform:scale(1)}
+  100%{opacity:1;transform:scale(1)}
+}
+
+.characterGate{
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  background:rgba(5,3,2,.96);
+  align-items:center;
+  justify-content:center;
+}
+
+.characterGateBook{
+  width:min(760px,92vw);
+  min-height:420px;
+  border:1px solid rgba(221,176,78,.55);
+  border-radius:18px;
+  padding:28px;
+  background:
+    radial-gradient(circle at top, rgba(221,176,78,.12), transparent 32%),
+    linear-gradient(180deg, rgba(37,28,17,.98), rgba(11,8,5,.98));
+  box-shadow:0 30px 80px rgba(0,0,0,.75), inset 0 0 55px rgba(0,0,0,.35);
+}
+
+.characterGateHeader{
+  text-align:center;
+  border-bottom:1px solid rgba(221,176,78,.4);
+  padding-bottom:18px;
+  margin-bottom:22px;
+}
+
+.characterGateList{
+  display:grid;
+  gap:14px;
+}
+
+.characterLedgerChoice{
+  padding:18px;
+  border:1px solid rgba(221,176,78,.55);
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.35));
+  color:var(--text);
+  text-align:left;
+}
+
+.characterLedgerChoice b{
+  display:block;
+  color:var(--gold);
+  font-size:1.25rem;
+}
+
+.characterLedgerChoice span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+}
+
+/* ==========================================================
+   Drive #1 - First Down
+   The Living Ledger - Open Book Layout
+   ========================================================== */
+
+.ledgerShell{
+
+    position:relative;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+
+    overflow:visible;
+
+}
+
+/* Whole open book */
+
+.ledgerShell::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(90deg,
+            #d5b77d 0%,
+            #e9d7aa 8%,
+            #f5e7bf 15%,
+            #f7edcb 50%,
+            #f5e7bf 85%,
+            #e3c88d 100%);
+
+    box-shadow:
+        0 35px 70px rgba(0,0,0,.45),
+        inset 0 0 60px rgba(115,82,33,.18);
+
+    z-index:-3;
+
+}
+
+/* Leather outside edge */
+
+.ledgerShell::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-34px;
+
+    border-radius:36px;
+
+    background:#3a2214;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,.55),
+        0 0 0 3px rgba(133,97,45,.55);
+
+    z-index:-4;
+
+}
+
+/* Center spine */
+
+.ledgerPages::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-18px;
+
+    top:-24px;
+
+    bottom:-24px;
+
+    width:36px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4d2f19,
+            #2a160d,
+            #140904,
+            #2a160d,
+            #4d2f19);
+
+    border-left:1px solid rgba(255,220,160,.22);
+
+    border-right:1px solid rgba(255,220,160,.22);
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.45);
+
+}
+
+/* Left page */
+
+.ledgerSidebar{
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f2e2b5,
+            #ebd7a5 55%,
+            #dfc790);
+
+    color:#4d3520;
+
+    border-right:none;
+
+    box-shadow:
+        inset -18px 0 28px rgba(0,0,0,.08);
+
+}
+
+/* Right page */
+
+.ledgerPages{
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f5e7bf,
+            #efddb0 60%,
+            #e4cb95);
+
+    color:#402a17;
+
+    box-shadow:
+        inset 18px 0 28px rgba(0,0,0,.08);
+
+}
+
+/* Make headings ink colored */
+
+.ledgerBrand,
+.ledgerVolume,
+.ledgerProfession,
+.ledgerContentsTitle{
+
+    color:#5b3518 !important;
+
+}
+
+/* Remove dark page backgrounds */
+
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+
+    background:rgba(255,250,236,.55);
+
+    color:#3c2615;
+
+    border-color:rgba(124,88,38,.35);
+
+    box-shadow:
+        inset 0 0 14px rgba(255,255,255,.25);
+
+}
+
+
+/* Drive #1 - First Down Correction: balanced open book pages */
+.ledgerShell{
+  grid-template-columns:minmax(360px, 44%) 1fr !important;
+  max-width:1400px;
+}
+
+.ledgerSidebar{
+  min-width:360px;
+  padding:34px 30px;
+}
+
+.ledgerPages{
+  min-height:760px;
+}
+
+.ledgerContents .tab{
+  max-width:100%;
+}
+
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+
+  .ledgerSidebar{
+    min-width:0;
+  }
+}
+
+/* Drive #1 - First Down: true two-page open book */
+body{
+  background:
+    radial-gradient(circle at center, rgba(90,50,22,.22), transparent 42%),
+    linear-gradient(180deg,#120905,#040201) !important;
+}
+
+.ledgerTop{
+  display:none !important;
+}
+
+.wrap{
+  max-width:none !important;
+}
+
+.ledgerShell{
+  width:min(1500px,94vw) !important;
+  margin:42px auto !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:0 !important;
+  position:relative !important;
+  border:none !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  overflow:visible !important;
+}
+
+/* leather cover underneath both pages */
+.ledgerShell::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:-38px !important;
+  border-radius:34px !important;
+  background:
+    radial-gradient(circle at center, rgba(172,112,42,.18), transparent 55%),
+    linear-gradient(180deg,#4b2715,#1b0c06) !important;
+  box-shadow:
+    0 38px 90px rgba(0,0,0,.75),
+    inset 0 0 55px rgba(0,0,0,.55),
+    0 0 0 3px rgba(150,105,42,.45) !important;
+  z-index:-5 !important;
+}
+
+/* parchment spread */
+.ledgerShell::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-18px !important;
+  border-radius:26px !important;
+  background:
+    linear-gradient(90deg,
+      #d1aa6c 0%,
+      #ead6aa 4%,
+      #f7e8bd 48%,
+      #b88a4d 50%,
+      #f8eac3 52%,
+      #ead6aa 96%,
+      #c69a5b 100%) !important;
+  box-shadow:
+    inset 0 0 45px rgba(111,75,27,.22),
+    0 18px 44px rgba(0,0,0,.45) !important;
+  z-index:-4 !important;
+}
+
+/* left page */
+.ledgerSidebar{
+  min-width:0 !important;
+  width:auto !important;
+  padding:46px 42px !important;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 25%),
+    linear-gradient(180deg,#f7e8bd,#ead3a0 70%,#ddbd78) !important;
+  color:#3e2714 !important;
+  border:none !important;
+  border-radius:22px 0 0 22px !important;
+  box-shadow:
+    inset -24px 0 42px rgba(66,38,12,.16),
+    inset 0 0 22px rgba(255,255,255,.24) !important;
+  min-height:780px !important;
+}
+
+/* right page */
+.ledgerPages{
+  padding:46px 42px !important;
+  min-height:780px !important;
+  position:relative !important;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,.28), transparent 25%),
+    linear-gradient(180deg,#f9ebc4,#efd9a7 70%,#e0c17d) !important;
+  color:#3e2714 !important;
+  border-radius:0 22px 22px 0 !important;
+  box-shadow:
+    inset 24px 0 42px rgba(66,38,12,.16),
+    inset 0 0 22px rgba(255,255,255,.22) !important;
+}
+
+/* center gutter */
+.ledgerPages::before{
+  content:"" !important;
+  position:absolute !important;
+  left:-22px !important;
+  top:-18px !important;
+  bottom:-18px !important;
+  width:44px !important;
+  background:
+    linear-gradient(90deg,
+      rgba(66,38,12,.35),
+      rgba(40,20,8,.7),
+      rgba(15,7,3,.9),
+      rgba(40,20,8,.7),
+      rgba(66,38,12,.35)) !important;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,.55),
+    0 0 22px rgba(0,0,0,.22) !important;
+  z-index:3 !important;
+  pointer-events:none !important;
+}
+
+/* left page typography */
+.ledgerBrand{
+  color:#5b3518 !important;
+  font-size:1.75rem !important;
+  text-align:center !important;
+  margin-top:6px !important;
+}
+
+.ledgerVolume,
+.ledgerProfession{
+  color:#6b4625 !important;
+  text-align:center !important;
+}
+
+.ledgerContentsTitle{
+  color:#5b3518 !important;
+  text-align:center !important;
+  margin-top:28px !important;
+  font-size:.95rem !important;
+}
+
+/* table of contents as printed entries, not sidebar buttons */
+.ledgerContents{
+  margin-top:20px !important;
+  gap:10px !important;
+}
+
+.ledgerContents .tab{
+  background:rgba(255,248,220,.45) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.32) !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  border-radius:8px !important;
+  padding:12px 14px 12px 28px !important;
+}
+
+.ledgerContents .tab.active{
+  background:rgba(123,76,25,.18) !important;
+  color:#2c1708 !important;
+  border-color:rgba(115,75,30,.65) !important;
+  box-shadow:inset 0 0 12px rgba(111,75,27,.12) !important;
+}
+
+.ledgerContents .tab:hover{
+  transform:translateX(4px) !important;
+}
+
+.ledgerContents .tab::before{
+  background:#6b4625 !important;
+}
+
+/* make right-page content inherit parchment feel */
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+  background:rgba(255,250,232,.58) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.28) !important;
+  box-shadow:inset 0 0 14px rgba(255,255,255,.24) !important;
+}
+
+.ledgerPages h2,
+.ledgerPages h3,
+.ledgerPages .journalTitle,
+.ledgerPages .journalPanel h3{
+  color:#5b3518 !important;
+}
+
+/* mobile stacks like pages */
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+  .ledgerSidebar,
+  .ledgerPages{
+    border-radius:18px !important;
+    min-height:auto !important;
+  }
+  .ledgerPages::before{
+    display:none !important;
+  }
+}
+
+/* Drive #1 Reset - Aldren's Workbench Layout */
+.ledgerShell{
+  width:min(1380px,94vw) !important;
+  margin:42px auto !important;
+  display:grid !important;
+  grid-template-columns:300px 1fr !important;
+  gap:22px !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+
+.ledgerShell::before,
+.ledgerShell::after,
+.ledgerPages::before{
+  display:none !important;
+}
+
+.ledgerSidebar{
+  min-width:0 !important;
+  min-height:760px !important;
+  padding:28px 22px !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(circle at top, rgba(221,176,78,.13), transparent 32%),
+    linear-gradient(180deg,#3a2214,#160b06) !important;
+  border:1px solid rgba(221,176,78,.5) !important;
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.58),
+    inset 0 0 38px rgba(0,0,0,.35) !important;
+  color:var(--text) !important;
+}
+
+.ledgerPages{
+  min-height:760px !important;
+  padding:34px !important;
+  border-radius:24px !important;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 26%),
+    linear-gradient(180deg,#f7e7bc,#ead2a0 72%,#d6b16f) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(121,78,29,.5) !important;
+  box-shadow:
+    0 24px 55px rgba(0,0,0,.55),
+    inset 0 0 35px rgba(255,255,255,.25),
+    inset 0 0 70px rgba(92,57,18,.12) !important;
+}
+
+.ledgerBrand{
+  color:var(--gold) !important;
+  text-align:center !important;
+  font-size:1.5rem !important;
+}
+
+.ledgerVolume,
+.ledgerProfession{
+  text-align:center !important;
+  color:var(--muted) !important;
+}
+
+.ledgerContentsTitle{
+  margin-top:26px !important;
+  text-align:center !important;
+  color:var(--gold) !important;
+  letter-spacing:2px !important;
+}
+
+.ledgerContentsTitle::before{
+  content:"The Index";
+}
+
+.ledgerContentsTitle{
+  font-size:0 !important;
+}
+
+.ledgerContentsTitle::before{
+  font-size:.9rem !important;
+}
+
+.ledgerContents .tab{
+  background:rgba(0,0,0,.2) !important;
+  color:var(--text) !important;
+  border:1px solid rgba(221,176,78,.34) !important;
+  border-radius:12px !important;
+  box-shadow:inset 0 0 12px rgba(0,0,0,.22) !important;
+  text-shadow:none !important;
+}
+
+.ledgerContents .tab.active{
+  background:linear-gradient(90deg, rgba(221,176,78,.28), rgba(0,0,0,.18)) !important;
+  border-color:rgba(221,176,78,.75) !important;
+  color:var(--gold) !important;
+}
+
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+  background:rgba(255,250,232,.62) !important;
+  color:#3e2714 !important;
+  border:1px solid rgba(115,75,30,.28) !important;
+}
+
+.ledgerPages h2,
+.ledgerPages h3,
+.ledgerPages .journalTitle,
+.ledgerPages .journalPanel h3{
+  color:#5b3518 !important;
+}
+
+@media(max-width:900px){
+  .ledgerShell{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* Opening Experience - Aldren's Study */
+.tomeGate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at center, rgba(190,126,45,.16), transparent 34%),
+    linear-gradient(180deg,#140905,#030201);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.studyGlow{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255,202,98,.16), transparent 18%),
+    radial-gradient(circle at 78% 28%, rgba(116,71,255,.14), transparent 16%);
+  animation:studyFlicker 3.5s infinite alternate ease-in-out;
+}
+
+.studyTable{
+  width:min(920px,92vw);
+  height:min(560px,76vh);
+  border-radius:36px;
+  background:
+    radial-gradient(circle at center, rgba(112,64,28,.95), rgba(29,13,6,.98) 68%),
+    linear-gradient(90deg,#2b1207,#693719,#2b1207);
+  box-shadow:
+    0 42px 110px rgba(0,0,0,.8),
+    inset 0 0 85px rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.ledgerTome{
+    position:relative;
+    width:min(720px,82vw) !important;
+    aspect-ratio:3/4;
+    height:auto !important;
+
+    background:none !important;
+    border:none !important;
+    box-shadow:none !important;
+
+    transform:rotate(-8deg);
+    transition:transform .35s ease;
+}
+
+.tomeAura{
+  position:absolute;
+  inset:-34px;
+  border-radius:34px;
+  background:radial-gradient(circle, rgba(221,176,78,.22), transparent 64%);
+  filter:blur(14px);
+  animation:runePulse 2.8s infinite ease-in-out;
+}
+
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.tomeSpine{
+  position:absolute;
+  left:38px;
+  top:0;
+  bottom:0;
+  width:76px;
+  background:linear-gradient(180deg,#2a1008,#100402);
+  border-left:1px solid rgba(255,225,160,.24);
+  border-right:2px solid rgba(221,176,78,.42);
+  box-shadow:inset -12px 0 22px rgba(0,0,0,.5);
+}
+
+.tomeCorner{
+  position:absolute;
+  width:48px;
+  height:48px;
+  border:3px double rgba(221,176,78,.9);
+}
+.tomeCorner.tl{left:16px;top:16px;border-right:0;border-bottom:0}
+.tomeCorner.tr{right:16px;top:16px;border-left:0;border-bottom:0}
+.tomeCorner.bl{left:16px;bottom:16px;border-right:0;border-top:0}
+.tomeCorner.br{right:16px;bottom:16px;border-left:0;border-top:0}
+
+.tomeRune{
+  position:absolute;
+  top:42px;
+  left:50%;
+  transform:translateX(-50%);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:2px solid rgba(255,225,160,.85);
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.2rem;
+  font-weight:bold;
+  box-shadow:0 0 24px rgba(221,176,78,.45), inset 0 0 18px rgba(0,0,0,.4);
+  animation:runePulse 2.4s infinite ease-in-out;
+}
+
+.tomeName{
+  position:absolute;
+  top:128px;
+  left:130px;
+  right:34px;
+  text-align:center;
+  color:var(--gold);
+  font-size:2.1rem;
+  font-weight:bold;
+  text-shadow:0 3px 12px rgba(0,0,0,.9);
+}
+
+.tomeKeeper{
+  position:absolute;
+  top:184px;
+  left:130px;
+  right:34px;
+  text-align:center;
+  color:var(--text);
+  opacity:.9;
+}
+
+.tomePrompt{
+  position:absolute;
+  bottom:34px;
+  left:130px;
+  right:34px;
+  text-align:center;
+  color:var(--muted);
+  letter-spacing:.5px;
+}
+
+.tomeOpenSpread{
+  position:absolute;
+  inset:-8px -26px;
+  display:flex;
+  opacity:0;
+  z-index:2;
+  transform:scale(.9);
+}
+
+.openingPage{
+  width:50%;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.28), transparent 32%),
+    linear-gradient(180deg,#f5e7bf,#e8cd91);
+  border:2px solid rgba(88,55,18,.8);
+  box-shadow:inset 0 0 35px rgba(92,57,18,.2);
+}
+.leftOpeningPage{border-radius:20px 4px 4px 20px}
+.rightOpeningPage{border-radius:4px 20px 20px 4px}
+
+.openingLedger .tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.openingLedger .tomeOpenSpread{
+  animation:spreadReveal 1.65s ease forwards;
+}
+
+.openingLedger{
+  animation:gateFade 1.9s ease forwards;
+}
+
+.characterGate{
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  background:
+    radial-gradient(circle at center, rgba(221,176,78,.13), transparent 36%),
+    linear-gradient(180deg,#120905,#030201);
+  align-items:center;
+  justify-content:center;
+}
+
+.characterBook{
+  width:min(1040px,92vw);
+  min-height:540px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-radius:26px;
+  overflow:hidden;
+  box-shadow:0 35px 90px rgba(0,0,0,.75);
+  border:3px solid rgba(105,66,25,.8);
+}
+
+.characterLeftPage,.characterRightPage{
+  padding:42px;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.25), transparent 30%),
+    linear-gradient(180deg,#f6e6ba,#e7ca8c);
+  color:#3e2714;
+}
+
+.characterLeftPage{
+  box-shadow:inset -24px 0 46px rgba(78,45,12,.18);
+}
+
+.characterRightPage{
+  box-shadow:inset 24px 0 46px rgba(78,45,12,.18);
+}
+
+.gateVolume{
+  color:#5b3518;
+  font-size:1.7rem;
+  font-weight:bold;
+}
+
+.characterGateList{
+  display:grid;
+  gap:16px;
+  margin-top:24px;
+}
+
+.characterLedgerChoice{
+  padding:18px;
+  border:1px solid rgba(115,75,30,.45);
+  border-radius:14px;
+  background:rgba(255,250,232,.48);
+  color:#3e2714;
+  text-align:left;
+}
+
+.characterLedgerChoice b{
+  display:block;
+  color:#5b3518;
+  font-size:1.35rem;
+}
+
+.characterLedgerChoice span{
+  display:block;
+  margin-top:6px;
+  opacity:.75;
+}
+
+@keyframes runePulse{
+  0%,100%{filter:brightness(1); opacity:.9}
+  50%{filter:brightness(1.35); opacity:1}
+}
+
+@keyframes studyFlicker{
+  from{opacity:.75}
+  to{opacity:1}
+}
+
+@keyframes coverOpen{
+  0%{transform:rotateY(0deg); opacity:1}
+  55%{transform:rotateY(-72deg); opacity:1}
+  100%{transform:rotateY(-105deg); opacity:0}
+}
+
+@keyframes spreadReveal{
+  0%{opacity:0; transform:scale(.86)}
+  45%{opacity:0; transform:scale(.9)}
+  75%{opacity:1; transform:scale(1.02)}
+  100%{opacity:1; transform:scale(1)}
+}
+
+@keyframes gateFade{
+  0%,72%{opacity:1}
+  100%{opacity:0}
+}
+
+@media(max-width:850px){
+  .characterBook{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ==========================================================
+   Visual Final Pass 1 - Aldren's Study Atmosphere
+   ========================================================== */
+
+.tomeGate{
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,190,86,.18), transparent 18%),
+    radial-gradient(circle at 82% 18%, rgba(139,92,255,.13), transparent 18%),
+    radial-gradient(circle at center, rgba(221,176,78,.13), transparent 38%),
+    linear-gradient(180deg,#160b06,#030201) !important;
+}
+
+.tomeGate::before,
+.tomeGate::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.tomeGate::before{
+  background-image:
+    radial-gradient(circle, rgba(255,220,130,.45) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,.18) 0 1px, transparent 2px);
+  background-size:90px 90px, 140px 140px;
+  animation:ledgerDust 18s linear infinite;
+  opacity:.28;
+}
+
+.tomeGate::after{
+  background:
+    radial-gradient(circle at center, transparent 42%, rgba(0,0,0,.65) 100%);
+}
+
+.studyTable{
+  background:
+    linear-gradient(90deg, rgba(35,14,5,.9), rgba(111,60,25,.95), rgba(35,14,5,.9)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 2px, transparent 2px 18px) !important;
+  border:1px solid rgba(120,68,28,.65);
+}
+
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.tomeCover::after{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(221,176,78,.35);
+  border-radius:16px;
+  box-shadow:inset 0 0 18px rgba(221,176,78,.12);
+}
+
+.tomeRune{
+  background:
+    radial-gradient(circle, rgba(255,225,140,.22), rgba(0,0,0,.35));
+}
+
+.ledgerPages{
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.34), transparent 24%),
+    radial-gradient(circle at 72% 78%, rgba(102,62,20,.12), transparent 30%),
+    repeating-linear-gradient(0deg, rgba(74,43,15,.035) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg,#f8e7b8,#ecd09a 72%,#d6ad66) !important;
+}
+
+.ledgerSidebar{
+  background:
+    radial-gradient(circle at 50% 8%, rgba(221,176,78,.14), transparent 28%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 2px, transparent 2px 12px),
+    linear-gradient(180deg,#3d2112,#160905) !important;
+}
+
+.ledgerContents .tab{
+  font-size:.96rem;
+}
+
+.ledgerContents .tab.active{
+  box-shadow:
+    inset 0 0 14px rgba(221,176,78,.18),
+    0 0 12px rgba(221,176,78,.12) !important;
+}
+
+.ledgerPages .card,
+.ledgerPages .journalBook,
+.ledgerPages .journalPanel{
+  border-radius:14px;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.18), transparent 24%),
+    rgba(255,250,232,.66) !important;
+}
+
+.characterBook{
+  border-color:rgba(221,176,78,.62) !important;
+}
+
+.characterLeftPage,
+.characterRightPage{
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.28), transparent 28%),
+    repeating-linear-gradient(0deg, rgba(74,43,15,.035) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg,#f8e7b8,#e8c98b) !important;
+}
+
+@keyframes ledgerDust{
+  from{background-position:0 0, 0 0;}
+  to{background-position:260px -420px, -220px -360px;}
+}
+
+
+/* Asset Pass 1 - Official Ledger art assets */
+.tomeGate{
+  background-image:url("assets/backgrounds/desk-background-v1.svg") !important;
+  background-size:cover !important;
+  background-position:center !important;
+}
+
+.studyTable{
+  background:transparent !important;
+  box-shadow:none !important;
+  border:none !important;
+}
+
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.tomeCover > *{
+  display:none !important;
+}
+
+.tomeOpenSpread{
+  background-image:url("assets/books/ledger-pages-v1.svg") !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+}
+
+.tomeOpenSpread .openingPage{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+
+.ledgerPages{
+  background-image:url("assets/books/ledger-pages-v1.svg") !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+}
+
+
+/* Asset Pass 1 Fix - keep art only in opening/character screen */
+
+/* Do NOT use the open-book art as the main app page background */
+.ledgerPages{
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.34), transparent 24%),
+    radial-gradient(circle at 72% 78%, rgba(102,62,20,.12), transparent 30%),
+    repeating-linear-gradient(0deg, rgba(74,43,15,.035) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg,#f8e7b8,#ecd09a 72%,#d6ad66) !important;
+}
+
+/* Make the closed book art dominate the opening */
+.ledgerTome{
+    position:relative;
+    width:min(720px,82vw) !important;
+    aspect-ratio:3/4;
+    height:auto !important;
+
+    background:none !important;
+    border:none !important;
+    box-shadow:none !important;
+
+    transform:rotate(-8deg);
+    transition:transform .35s ease;
+}
+
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+/* Keep the open pages only during the opening animation */
+.tomeOpenSpread{
+  inset:-18px -70px !important;
+  background-image:url("assets/books/ledger-pages-v1.svg") !important;
+  background-size:contain !important;
+  background-repeat:no-repeat !important;
+  background-position:center !important;
+}
+
+/* Character select should look like open parchment, not a dark popup */
+.characterBook{
+  background-image:url("assets/books/ledger-pages-v1.svg") !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  border:none !important;
+  box-shadow:0 35px 90px rgba(0,0,0,.75) !important;
+}
+
+.characterLeftPage,
+.characterRightPage{
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Give the open animation more time before character select appears */
+.openingLedger{
+  animation:gateFade 2.5s ease forwards !important;
+}
+
+.openingLedger .tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.openingLedger .tomeOpenSpread{
+  animation:spreadReveal 2.25s ease forwards !important;
+}
+
+@keyframes gateFade{
+  0%,82%{opacity:1}
+  100%{opacity:0}
+}
+
+
+/* Character Selection readability fix */
+.characterBook{
+  background-image:none !important;
+  background:
+    linear-gradient(90deg,#d7b16f 0%,#f7e7bc 6%,#f4e0ad 49%,#7a4b22 50%,#f4e0ad 51%,#f7e7bc 94%,#d7b16f 100%) !important;
+  border:3px solid rgba(105,66,25,.8) !important;
+}
+
+.characterLeftPage,
+.characterRightPage{
+  padding:56px !important;
+  background:transparent !important;
+}
+
+.characterLeftPage{
+  padding-right:70px !important;
+}
+
+.characterRightPage{
+  padding-left:70px !important;
+}
+
+.characterGateList{
+  max-width:100% !important;
+}
+
+/* Remove blank open-book reveal from intro */
+.tomeOpenSpread{
+  display:none !important;
+}
+
+.openingLedger .tomeOpenSpread{
+  display:none !important;
+  animation:none !important;
+}
+
+.openingLedger .tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.openingLedger{
+  animation:gateFadeDirect 1.6s ease forwards !important;
+}
+
+@keyframes coverOpenDirect{
+  0%{opacity:1;transform:scale(1) rotateY(0deg);}
+  65%{opacity:1;transform:scale(1.04) rotateY(-28deg);}
+  100%{opacity:0;transform:scale(1.08) rotateY(-42deg);}
+}
+
+@keyframes gateFadeDirect{
+  0%,70%{opacity:1;}
+  100%{opacity:0;}
+}
+
+/* Real asset integration - opening book cover */
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.tomeCover > *{
+  display:none !important;
+}
+
+/* ==========================================================
+   Production Desk Asset
+   ========================================================== */
+
+.tomeGate{
+    background-image:url("assets/backgrounds/desk-background-v1.png") !important;
+    background-size:cover !important;
+    background-position:center center !important;
+    background-repeat:no-repeat !important;
+    background-color:#120905 !important;
+}
+
+.studyTable{
+    background:transparent !important;
+    border:none !important;
+    box-shadow:none !important;
+}
+
+
+/* Production Book Placement Fix */
+.ledgerTome{
+    position:relative;
+    width:min(720px,82vw) !important;
+    aspect-ratio:3/4;
+    height:auto !important;
+
+    background:none !important;
+    border:none !important;
+    box-shadow:none !important;
+
+    transform:rotate(-8deg);
+    transition:transform .35s ease;
+}
+
+.tomeCover{
+    background-image:url("assets/books/ledger-cover-clean.png") !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center center !important;
+    background-color:transparent !important;
+
+    border:none !important;
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.45),
+        0 12px 28px rgba(0,0,0,.28) !important;
+}
+
+.tomeCover::after,
+.tomeAura,
+.tomeOpenSpread{
+  display:none !important;
+}
+
+.studyTable{
+  background:transparent !important;
+  box-shadow:none !important;
+  border:none !important;
+}
+
+.closedTome,
+.bookScene,
+.bookShadow{
+  display:none !important;
+}
+
+
+
+/* Emergency fix - make ledger cover visible again */
+.ledgerTome{
+  position:relative !important;
+  width:min(760px,86vw) !important;
+  height:520px !important;
+  aspect-ratio:auto !important;
+  background:none !important;
+  border:none !important;
+  box-shadow:none !important;
+  transform:rotate(-8deg) !important;
+  transition:transform .35s ease !important;
+}
+
+.ledgerTome:hover{
+  transform:rotate(-6deg) scale(1.02) !important;
+}
+
+.tomeCover{
+  position:absolute !important;
+  inset:0 !important;
+  display:block !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  background-image:url("assets/books/ledger-cover-clean.png") !important;
+  background-size:contain !important;
+  background-repeat:no-repeat !important;
+  background-position:center center !important;
+  background-color:transparent !important;
+  border:none !important;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.55),
+    0 14px 28px rgba(0,0,0,.35) !important;
+  z-index:5 !important;
+}
+
+.tomeCover > *{
+  display:none !important;
+}
+
+
+
+
+

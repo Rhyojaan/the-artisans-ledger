@@ -76,4 +76,12 @@ He studies the player's archive and offers recommendations rather than simply di
 
 # Design Philosophy
 
-If a feature removes the need to visit another ESO website, it belongs in The Alchemist.
+If a feature removes the need to visit another ESO website, it belongs in The Alchemist.## Long-Term Interface Vision
+
+Project Codename should eventually feel like opening Aldren's book.
+
+When the player first visits the site, they see a book resting on a table. The book opens, and Aldren greets them. After the player identifies themselves, the page turns to a Table of Contents.
+
+Each major app section is treated like a chapter. When the player selects a chapter, the book turns to that page.
+
+This should be treated as a major visual/UI milestone after the core systems are stable.
