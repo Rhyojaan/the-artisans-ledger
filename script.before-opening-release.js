@@ -298,7 +298,7 @@ function toggleJournalEdit(){
     render();
     const first=document.querySelector(".tab");
     if(first)showTab("advisor",first);
-  },1450);
+  },1600);
 }
 
 render();
