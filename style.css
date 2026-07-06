@@ -620,3 +620,56 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   from{opacity:1;}
   to{opacity:0;}
 }
+
+/* Stationary, non-glowing tome override */
+.studyGlow,
+.tomeGate::before,
+.tomeAura {
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.ledgerTome,
+.ledgerTome:hover {
+  transform: translate(-50%, -50%) rotate(-10deg) !important;
+  transition: none !important;
+}
+
+.openingLedger .ledgerTome,
+.openingLedger .tomeCover {
+  animation: none !important;
+}
+
+.openingLedger {
+  animation: releaseGateFade 0.35s ease forwards !important;
+}/* Remove remaining tome cover glow */
+.tomeCover,
+.ledgerTome .tomeCover,
+.ledgerTome:hover .tomeCover {
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+.ledgerTome::before,
+.ledgerTome::after,
+.tomeCover::before,
+.tomeCover::after {
+  box-shadow: none !important;
+  filter: none !important;
+}
+/* Remove remaining table/book atmosphere glow */
+.studyTable::before,
+.studyTable::after,
+.tomeGate::after {
+  display: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.ledgerTome,
+.ledgerTome:hover,
+.ledgerTome:focus {
+  filter: none !important;
+  box-shadow: none !important;
+}
