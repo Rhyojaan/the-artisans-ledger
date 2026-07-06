@@ -16,15 +16,22 @@
 
 *{box-sizing:border-box}
 
+
 body{
-  margin:0;
-  background:
-    radial-gradient(circle at center, rgba(90,50,22,.22), transparent 42%),
-    linear-gradient(180deg,#120905,#040201);
-  color:var(--text);
-  font-family:Arial,system-ui,sans-serif;
-  font-size:18px;
+
+    margin:0;
+
+    background-image:url("assets/backgrounds/desk-background-v1.png");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+
+    color:#3b2414;
+
+    overflow-x:hidden;
 }
+
 
 header{display:none}
 h1{margin:0;color:var(--gold);font-size:34px}
@@ -49,22 +56,206 @@ button{cursor:pointer;color:#ffdc8c;font-weight:800;background:linear-gradient(#
 mark{background:#5c4117;color:#ffe7aa;border-radius:4px;padding:1px 5px}.notice{border:1px solid var(--gold2);background:#100b06;border-radius:12px;padding:12px;margin-top:10px;color:var(--text)}
 body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,body.playing input,body.playing select{font-size:22px;padding:15px}body.playing h1{font-size:40px}.titlecard{text-align:center;padding:28px}.quote{font-style:italic;color:#edd28d;font-size:20px}
 
-/* Opening Experience */
-.tomeGate{position:fixed;inset:0;z-index:9999;overflow:hidden;display:flex;align-items:center;justify-content:center;background-image:url("assets/backgrounds/desk-background-v1.png");background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#120905;perspective:1400px}
-.tomeGate::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,220,130,.45) 0 1px,transparent 2px),radial-gradient(circle,rgba(255,255,255,.18) 0 1px,transparent 2px);background-size:90px 90px,140px 140px;animation:ledgerDust 18s linear infinite;opacity:.23}
-.tomeGate::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 45%,rgba(0,0,0,.68) 100%)}
-.studyGlow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 24% 20%,rgba(255,202,98,.16),transparent 18%),radial-gradient(circle at 78% 28%,rgba(116,71,255,.14),transparent 16%);animation:studyFlicker 3.5s infinite alternate ease-in-out}
-.studyTable{width:min(920px,92vw);height:min(560px,76vh);display:flex;align-items:center;justify-content:center;position:relative;background:transparent;border:none;box-shadow:none}
-.ledgerTome{position:relative;width:min(760px,86vw);height:520px;background:none;border:none;box-shadow:none;transform:rotate(-8deg);transition:transform .35s ease;cursor:pointer}
-.ledgerTome:hover{transform:rotate(-6deg) scale(1.02)}
-.tomeAura,.tomeOpenSpread,.closedTome,.bookScene,.bookShadow,.openingBook{display:none!important}
-.tomeCover{position:absolute;inset:0;display:block;opacity:1;visibility:visible;background-image:url("assets/books/ledger-cover-clean.png");background-size:contain;background-repeat:no-repeat;background-position:center;background-color:transparent;border:none;box-shadow:0 30px 70px rgba(0,0,0,.55),0 14px 28px rgba(0,0,0,.35);z-index:5}
-.tomeCover::after,.tomeCover>*{display:none!important}
-.openingLedger .tomeCover{animation:coverOpenDirect 1.45s ease forwards}.openingLedger{animation:gateFadeDirect 1.6s ease forwards}.characterGate{display:none}
-@keyframes coverOpenDirect{0%{opacity:1;transform:scale(1) rotateY(0)}65%{opacity:1;transform:scale(1.04) rotateY(-28deg)}100%{opacity:0;transform:scale(1.08) rotateY(-42deg)}}
-@keyframes gateFadeDirect{0%,70%{opacity:1}100%{opacity:0}}
-@keyframes ledgerDust{from{background-position:0 0,0 0}to{background-position:260px -420px,-220px -360px}}
-@keyframes studyFlicker{from{opacity:.75}to{opacity:1}}
+
+/* Opening Experience - single smooth sequence */
+.tomeGate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-image:url("assets/backgrounds/desk-background-v1.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-color:#120905;
+  perspective:1800px;
+}
+
+.tomeGate::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle,rgba(255,220,130,.42) 0 1px,transparent 2px),
+    radial-gradient(circle,rgba(255,255,255,.16) 0 1px,transparent 2px);
+  background-size:90px 90px,140px 140px;
+  animation:ledgerDust 18s linear infinite;
+  opacity:.22;
+}
+
+.tomeGate::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at center,transparent 45%,rgba(0,0,0,.68) 100%);
+}
+
+.studyGlow{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 24% 20%,rgba(255,202,98,.16),transparent 18%),
+    radial-gradient(circle at 78% 28%,rgba(116,71,255,.14),transparent 16%);
+  animation:studyFlicker 3.5s infinite alternate ease-in-out;
+}
+
+.studyTable{
+  width:min(920px,92vw);
+  height:min(560px,76vh);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:visible;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+
+.ledgerTome{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(900px,88vw);
+  height:min(650px,76vh);
+  transform:translate(-50%,-50%) rotate(-10deg);
+  transform-origin:center center;
+  transform-style:preserve-3d;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  cursor:pointer;
+  transition:transform .35s ease;
+  will-change:transform,opacity;
+}
+
+.ledgerTome:hover{
+  transform:translate(-50%,-50%) rotate(-8deg) scale(1.025);
+}
+
+.tomeAura,.closedTome,.bookScene,.bookShadow,.openingBook{
+  display:none !important;
+}
+
+.tomeOpenSpread{
+  position:absolute;
+  inset:8% 7%;
+  display:block;
+  opacity:0;
+  transform:scale(.96);
+  border-radius:22px;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.22) 49%,rgba(84,45,16,.34) 50%,rgba(0,0,0,.22) 51%),
+    linear-gradient(90deg,#f1d99f,#f8e7b8 48%,#e6c282 52%,#f2d79c);
+  box-shadow:0 28px 52px rgba(0,0,0,.44),inset 0 0 32px rgba(92,57,18,.16);
+  z-index:2;
+  pointer-events:none;
+}
+
+.openingPage{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  background:repeating-linear-gradient(0deg,rgba(74,43,15,.055) 0 1px,transparent 1px 9px);
+  opacity:.45;
+}
+
+.leftOpeningPage{left:0;border-radius:22px 4px 4px 22px}
+.rightOpeningPage{right:0;border-radius:4px 22px 22px 4px}
+
+.tomeCover{
+  position:absolute;
+  inset:0;
+  display:block;
+  opacity:1;
+  visibility:visible;
+  background-image:url("assets/books/ledger-cover-clean.png");
+  background-size:100% auto;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-color:transparent;
+  border:none;
+  box-shadow:none;
+  filter:drop-shadow(0 35px 40px rgba(0,0,0,.6));
+  z-index:5;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  will-change:transform,opacity,filter;
+}
+
+.tomeCover::before,
+.tomeCover::after,
+.tomeCover>*{
+  display:none !important;
+  content:none !important;
+}
+
+.openingLedger{
+  pointer-events:none;
+  animation:ledgerGateFade 2.05s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+.openingLedger .ledgerTome{
+  animation:ledgerSettleOpen 1.65s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.openingLedger .tomeOpenSpread{
+  animation:ledgerPagesReveal 1.65s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.openingLedger .tomeCover{
+  animation:ledgerCoverOpen 1.65s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.characterGate{display:none}
+
+@keyframes ledgerCoverOpen{
+  0%{
+    opacity:1;
+    transform:rotateY(0deg) translateZ(2px);
+    filter:drop-shadow(0 35px 40px rgba(0,0,0,.6));
+  }
+  100%{
+    opacity:0;
+    transform:rotateY(-112deg) translateZ(2px);
+    filter:drop-shadow(0 44px 56px rgba(0,0,0,.35));
+  }
+}
+
+@keyframes ledgerSettleOpen{
+  0%{transform:translate(-50%,-50%) rotate(-10deg) scale(1);opacity:1}
+  100%{transform:translate(-50%,-50%) rotate(-4deg) scale(1.06);opacity:1}
+}
+
+@keyframes ledgerPagesReveal{
+  0%{opacity:0;transform:scale(.96)}
+  35%{opacity:.35;transform:scale(.985)}
+  100%{opacity:1;transform:scale(1)}
+}
+
+@keyframes ledgerGateFade{
+  0%,76%{opacity:1}
+  100%{opacity:0}
+}
+
+@keyframes ledgerDust{
+  from{background-position:0 0,0 0}
+  to{background-position:260px -420px,-220px -360px}
+}
+
+@keyframes studyFlicker{
+  from{opacity:.75}
+  to{opacity:1}
+}
+
 
 /* Ledger Workbench Layout */
 .ledgerTop{display:none}
@@ -74,7 +265,38 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
 .ledgerBrand{color:var(--gold);text-align:center;font-size:1.5rem;font-weight:bold;letter-spacing:1px}.ledgerVolume{margin-top:14px;text-align:center;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-size:.78rem}.ledgerProfession{margin-top:4px;text-align:center;color:var(--muted);font-size:1.15rem}.ledgerDivider{height:1px;margin:20px 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .ledgerContentsTitle{margin-top:26px;margin-bottom:12px;text-align:center;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:0}.ledgerContentsTitle::before{content:"The Index";font-size:.9rem}.ledgerContents{display:flex;flex-direction:column;gap:8px}
 .ledgerContents .tab{width:100%;text-align:left;justify-content:flex-start;position:relative;padding:12px 14px 12px 28px;border-radius:12px;background:rgba(0,0,0,.2);color:var(--text);border:1px solid rgba(221,176,78,.34);box-shadow:inset 0 0 12px rgba(0,0,0,.22);text-shadow:none;outline:none;transition:transform .18s ease,filter .18s ease,border-color .18s ease}.ledgerContents .tab::before{content:"";position:absolute;left:10px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:rgba(221,176,78,.72)}.ledgerContents .tab:hover{transform:translateX(6px);filter:brightness(1.06)}.ledgerContents .tab.active{background:linear-gradient(90deg,rgba(221,176,78,.28),rgba(0,0,0,.18));border-color:rgba(221,176,78,.75);color:var(--gold);box-shadow:inset 0 0 14px rgba(221,176,78,.18),0 0 12px rgba(221,176,78,.12)}
-.ledgerPages{min-height:760px;padding:34px;border-radius:24px;background:radial-gradient(circle at 18% 12%,rgba(255,255,255,.34),transparent 24%),radial-gradient(circle at 72% 78%,rgba(102,62,20,.12),transparent 30%),repeating-linear-gradient(0deg,rgba(74,43,15,.035) 0 1px,transparent 1px 7px),linear-gradient(180deg,#f8e7b8,#ecd09a 72%,#d6ad66);color:var(--ink);border:1px solid rgba(121,78,29,.5);box-shadow:0 24px 55px rgba(0,0,0,.55),inset 0 0 35px rgba(255,255,255,.25),inset 0 0 70px rgba(92,57,18,.12)}
+
+
+
+.ledgerPages{
+
+    width:min(920px,94vw);
+
+    min-height:1450px;
+
+    margin:50px auto;
+
+    padding:110px 95px 150px;
+
+    background-image:url("assets/pages/ledger-page-v1.png");
+
+    background-size:100% 100%;
+
+    background-repeat:no-repeat;
+
+    background-position:center top;
+
+    border:none;
+
+    box-shadow:none;
+
+    color:#3b2414;
+
+    position:relative;
+}
+
+
+
 .ledgerPages .panel{margin:0}.ledgerPages .card,.ledgerPages .journalBook,.ledgerPages .journalPanel{border-radius:14px;background:radial-gradient(circle at top left,rgba(255,255,255,.18),transparent 24%),rgba(255,250,232,.66);color:var(--ink);border:1px solid rgba(115,75,30,.28);box-shadow:inset 0 0 14px rgba(255,255,255,.24)}.ledgerPages h2,.ledgerPages h3,.ledgerPages .journalTitle,.ledgerPages .journalPanel h3{color:var(--ink-soft)}
 
 /* Chapter Transitions */
@@ -87,298 +309,314 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
 @media(max-width:900px){.ledgerShell{grid-template-columns:1fr}.ledgerSidebar{min-height:auto}#journal .journalHero,#journal .journalMainGrid,#journal .journalThreeGrid{grid-template-columns:1fr}}
 @media(max-width:700px){body{font-size:16px}h1{font-size:26px}.controls>*{width:100%}.controls input{min-width:0}.row{align-items:flex-start;flex-direction:column}}
 
-/* Final cover cleanup - no image box */
-.tomeCover{
-  box-shadow:none !important;
-  filter:drop-shadow(0 30px 34px rgba(0,0,0,.55)) !important;
+
+/* ---------- Version 1.0 Navigation Polish ---------- */
+.alchemyPage{
+  display:none;
 }
 
-.tomeCover::before,
-.tomeCover::after{
-  display:none !important;
-  content:none !important;
+.alchemyPage.active{
+  display:block;
+  animation:alchemyPageIn .22s ease forwards;
 }
 
-.studyTable,
-.ledgerTome,
-.tomeCover{
-  background-color:transparent !important;
+.alchemySubtabs .alchemySubtab.active{
+  background:linear-gradient(#6b4a1f,#32200d);
+  color:var(--gold);
+  border-color:rgba(221,176,78,.8);
 }
 
-/* ---------- Final Production Book Placement ---------- */
+.professionChapter{
+  border-left:5px solid var(--gold2);
+}
 
+@keyframes alchemyPageIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+
+/* ---------- Opening Sequence: Slow Golden Ledger Opening ---------- */
+
+/* The animation is deliberately slower so the player can read the motion. */
+:root{
+  --opening-duration:4.8s;
+}
+
+/* Keep the tome locked to the center of the desk. */
 .ledgerTome{
-    width:900px !important;
-    height:650px !important;
-
-    position:absolute !important;
-    left:50% !important;
-    top:50% !important;
-
-    transform:translate(-50%,-50%) rotate(-10deg) !important;
-    transform-origin:center center !important;
+  transform-style:preserve-3d;
+  perspective:1900px;
 }
 
-.ledgerTome:hover{
-    transform:translate(-50%,-50%) rotate(-8deg) scale(1.03) !important;
+/* Do not show a finished open-book screen after the animation. This spread appears only during the opening motion. */
+.tomeOpenSpread{
+  display:block !important;
+  opacity:0;
+  transform:scale(.88) rotateX(2deg);
+  pointer-events:none;
+  z-index:2;
 }
 
-.tomeCover{
-    background-size:100% auto !important;
-    background-position:center center !important;
-    background-repeat:no-repeat !important;
-
-    filter:drop-shadow(0 35px 40px rgba(0,0,0,.60)) !important;
+/* Golden seam of light coming from the book's binding. */
+.ledgerTome::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:9%;
+  width:10px;
+  height:82%;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,245,190,0),
+    rgba(255,238,145,.92) 18%,
+    rgba(255,198,48,1) 50%,
+    rgba(255,238,145,.92) 82%,
+    rgba(255,245,190,0)
+  );
+  box-shadow:
+    0 0 18px rgba(255,205,55,.9),
+    0 0 42px rgba(255,180,25,.75),
+    0 0 92px rgba(255,160,10,.48);
+  opacity:0;
+  z-index:6;
+  pointer-events:none;
 }
 
-.studyTable{
-    overflow:visible !important;
+/* Large magical glow that blooms outward from the ledger. */
+.ledgerTome::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:28%;
+  height:42%;
+  transform:translate(-50%,-50%) scale(.4);
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(255,246,194,.98) 0%,
+    rgba(255,214,85,.72) 24%,
+    rgba(255,169,22,.34) 48%,
+    rgba(255,169,22,0) 72%
+  );
+  filter:blur(4px);
+  opacity:0;
+  z-index:7;
+  pointer-events:none;
+  mix-blend-mode:screen;
 }
 
-
-/* ---------- Book Opening Animation ---------- */
+.openingLedger{
+  pointer-events:none;
+  animation:ledgerSceneFade var(--opening-duration) ease-in-out forwards !important;
+}
 
 .openingLedger .ledgerTome{
-    animation:ledgerOpen 1.6s ease forwards !important;
-}
-
-@keyframes ledgerOpen{
-
-0%{
-transform:translate(-50%,-50%) rotate(-10deg) scale(1);
-opacity:1;
-}
-
-35%{
-transform:translate(-50%,-50%) rotate(-6deg) scale(1.05);
-opacity:1;
-}
-
-70%{
-transform:translate(-50%,-50%) rotateY(-65deg) scale(1.08);
-opacity:1;
-}
-
-100%{
-transform:translate(-50%,-50%) rotateY(-92deg) scale(1.12);
-opacity:0;
-}
-
-}
-
-
-/* ---------- Real Book Opening ---------- */
-
-.ledgerTome{
-    transform-style:preserve-3d;
-    perspective:1800px;
-}
-
-.tomeCover{
-    transform-origin:left center !important;
-    transform-style:preserve-3d;
-    backface-visibility:hidden;
-}
-
-.openingLedger .ledgerTome{
-    animation:none !important;
-}
-
-.openingLedger .tomeCover{
-    animation:openCover 1.25s ease-in-out forwards !important;
-}
-
-@keyframes openCover{
-
-0%{
-transform:rotateY(0deg);
-}
-
-100%{
-transform:rotateY(-155deg);
-}
-
-}
-
-/* Keep book opening centered */
-.openingLedger .tomeCover{
-  animation:coverOpenCentered 1.45s ease forwards !important;
+  animation:ledgerSlowSettle var(--opening-duration) cubic-bezier(.22,.61,.36,1) forwards !important;
   transform-origin:center center !important;
 }
 
-@keyframes coverOpenCentered{
+.openingLedger .tomeCover{
+  animation:ledgerCoverSlowOpen var(--opening-duration) cubic-bezier(.22,.61,.36,1) forwards !important;
+  transform-origin:left center !important;
+  backface-visibility:visible !important;
+  z-index:5;
+}
+
+.openingLedger .tomeOpenSpread{
+  animation:ledgerInnerPagesGlow var(--opening-duration) cubic-bezier(.22,.61,.36,1) forwards !important;
+}
+
+.openingLedger .ledgerTome::before{
+  animation:ledgerSeamGlow var(--opening-duration) ease-in-out forwards;
+}
+
+.openingLedger .ledgerTome::after{
+  animation:ledgerBloomGlow var(--opening-duration) ease-in-out forwards;
+}
+
+@keyframes ledgerSlowSettle{
+  0%{
+    transform:translate(-50%,-50%) rotate(-10deg) scale(1);
+    opacity:1;
+  }
+  22%{
+    transform:translate(-50%,-50%) rotate(-9deg) scale(1.015);
+    opacity:1;
+  }
+  55%{
+    transform:translate(-50%,-50%) rotate(-6deg) scale(1.045);
+    opacity:1;
+  }
+  82%{
+    transform:translate(-50%,-50%) rotate(-3deg) scale(1.075);
+    opacity:1;
+  }
+  100%{
+    transform:translate(-50%,-50%) rotate(-2deg) scale(1.09);
+    opacity:1;
+  }
+}
+
+@keyframes ledgerCoverSlowOpen{
   0%{
     opacity:1;
-    transform:scale(1) rotateY(0deg);
+    transform:rotateY(0deg) translateZ(4px);
+    filter:drop-shadow(0 35px 40px rgba(0,0,0,.6));
   }
-  60%{
+  18%{
     opacity:1;
-    transform:scale(1.08) rotateY(-32deg);
+    transform:rotateY(-8deg) translateZ(4px);
+    filter:drop-shadow(0 36px 42px rgba(0,0,0,.58));
+  }
+  42%{
+    opacity:1;
+    transform:rotateY(-28deg) translateZ(7px);
+    filter:drop-shadow(0 40px 48px rgba(0,0,0,.52));
+  }
+  66%{
+    opacity:.92;
+    transform:rotateY(-58deg) translateZ(10px);
+    filter:drop-shadow(0 45px 54px rgba(0,0,0,.42));
+  }
+  84%{
+    opacity:.45;
+    transform:rotateY(-82deg) translateZ(12px);
+    filter:drop-shadow(0 50px 58px rgba(0,0,0,.28));
   }
   100%{
     opacity:0;
-    transform:scale(1.14) rotateY(-48deg);
+    transform:rotateY(-96deg) translateZ(12px);
+    filter:drop-shadow(0 54px 62px rgba(0,0,0,.12));
   }
 }
 
-/* Final production opening */
-
-.openingLedger .tomeCover{
-    animation:coverOpenCentered 1.35s cubic-bezier(.22,.61,.36,1) forwards !important;
-}
-
-@keyframes coverOpenCentered{
-
-0%{
-    transform:scale(1) rotate(-10deg) rotateY(0deg);
-    opacity:1;
-}
-
-45%{
-    transform:scale(1.04) rotate(-8deg) rotateY(-18deg);
-    opacity:1;
-}
-
-75%{
-    transform:scale(1.08) rotate(-6deg) rotateY(-38deg);
-    opacity:1;
-}
-
-100%{
-    transform:scale(1.12) rotate(-4deg) rotateY(-55deg);
+@keyframes ledgerInnerPagesGlow{
+  0%,14%{
     opacity:0;
-}
-
-}
-
-.openingLedger{
-    animation:gateFade 1.45s ease forwards !important;
-}
-
-@keyframes gateFade{
-
-0%,80%{
-    opacity:1;
-}
-
-100%{
+    transform:scale(.88) rotateX(2deg);
+    filter:brightness(.9);
+  }
+  30%{
+    opacity:.24;
+    transform:scale(.93) rotateX(1deg);
+    filter:brightness(1.05);
+  }
+  55%{
+    opacity:.58;
+    transform:scale(.98) rotateX(0deg);
+    filter:brightness(1.22);
+  }
+  76%{
+    opacity:.88;
+    transform:scale(1.02) rotateX(0deg);
+    filter:brightness(1.55);
+  }
+  100%{
     opacity:0;
+    transform:scale(1.08) rotateX(0deg);
+    filter:brightness(2.4);
+  }
 }
 
+@keyframes ledgerSeamGlow{
+  0%{
+    opacity:0;
+    width:4px;
+    box-shadow:0 0 0 rgba(255,205,55,0);
+  }
+  16%{
+    opacity:.38;
+    width:7px;
+    box-shadow:0 0 18px rgba(255,205,55,.5),0 0 34px rgba(255,180,25,.35);
+  }
+  38%{
+    opacity:.78;
+    width:12px;
+    box-shadow:0 0 24px rgba(255,220,80,.85),0 0 58px rgba(255,180,25,.66),0 0 100px rgba(255,150,0,.4);
+  }
+  68%{
+    opacity:1;
+    width:22px;
+    box-shadow:0 0 34px rgba(255,240,170,1),0 0 86px rgba(255,190,45,.9),0 0 150px rgba(255,150,0,.62);
+  }
+  86%{
+    opacity:1;
+    width:46px;
+    box-shadow:0 0 48px rgba(255,250,210,1),0 0 130px rgba(255,205,65,.96),0 0 230px rgba(255,170,20,.78);
+  }
+  100%{
+    opacity:0;
+    width:120px;
+    box-shadow:0 0 90px rgba(255,250,220,1),0 0 260px rgba(255,210,80,.9),0 0 420px rgba(255,180,30,.7);
+  }
 }
 
-/* ==========================================================
-   RELEASE: Final Opening Experience
-   ========================================================== */
-
-.tomeGate{
-  position:fixed !important;
-  inset:0 !important;
-  z-index:9999 !important;
-  overflow:hidden !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  background-image:url("assets/backgrounds/desk-background-v1.png") !important;
-  background-size:cover !important;
-  background-position:center !important;
-  background-repeat:no-repeat !important;
+@keyframes ledgerBloomGlow{
+  0%,24%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.35);
+  }
+  48%{
+    opacity:.42;
+    transform:translate(-50%,-50%) scale(.9);
+  }
+  72%{
+    opacity:.72;
+    transform:translate(-50%,-50%) scale(1.65);
+  }
+  90%{
+    opacity:.95;
+    transform:translate(-50%,-50%) scale(3.2);
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(4.5);
+  }
 }
 
-.tomeGate::after{
-  content:"" !important;
-  position:absolute !important;
-  inset:0 !important;
-  pointer-events:none !important;
-  background:radial-gradient(circle at center, transparent 45%, rgba(0,0,0,.68) 100%) !important;
+@keyframes ledgerSceneFade{
+  0%,82%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+  }
 }
 
-.studyGlow{
-  position:absolute !important;
-  inset:0 !important;
-  pointer-events:none !important;
-  background:
-    radial-gradient(circle at 22% 18%, rgba(255,202,98,.16), transparent 18%),
-    radial-gradient(circle at 78% 28%, rgba(116,71,255,.12), transparent 16%) !important;
-}
 
-.studyTable{
-  position:relative !important;
-  width:100vw !important;
-  height:100vh !important;
-  background:transparent !important;
-  border:none !important;
-  box-shadow:none !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  overflow:visible !important;
-}
-
-.ledgerTome{
-  position:absolute !important;
-  left:50% !important;
-  top:50% !important;
-  width:min(900px,88vw) !important;
-  height:min(650px,74vh) !important;
-  transform:translate(-50%,-50%) rotate(-10deg) !important;
-  border:0 !important;
-  padding:0 !important;
-  margin:0 !important;
-  background:transparent !important;
-  box-shadow:none !important;
-  cursor:pointer !important;
-}
-
-.ledgerTome:hover{
-  transform:translate(-50%,-50%) rotate(-8deg) scale(1.03) !important;
-}
-
-.tomeCover{
-  position:absolute !important;
-  inset:0 !important;
-  display:block !important;
-  background-image:url("assets/books/ledger-cover-clean.png") !important;
-  background-size:contain !important;
-  background-repeat:no-repeat !important;
-  background-position:center !important;
-  background-color:transparent !important;
-  box-shadow:none !important;
-  filter:drop-shadow(0 35px 40px rgba(0,0,0,.6)) !important;
-}
-
-.tomeCover::before,
-.tomeCover::after{
-  display:none !important;
-  content:none !important;
-}
-
-.openingLedger .tomeCover{
-  animation:releaseCoverOpen 1.35s cubic-bezier(.22,.61,.36,1) forwards !important;
-}
-
-.openingLedger{
-  animation:releaseGateFade 1.45s ease forwards !important;
-}
-
-@keyframes releaseCoverOpen{
-  0%{transform:scale(1) rotateY(0deg);opacity:1;}
-  45%{transform:scale(1.04) rotateY(-18deg);opacity:1;}
-  75%{transform:scale(1.08) rotateY(-38deg);opacity:1;}
-  100%{transform:scale(1.12) rotateY(-55deg);opacity:0;}
-}
-
-@keyframes releaseGateFade{
-  0%,80%{opacity:1;}
-  100%{opacity:0;}
-}
-
-.characterGate,
-.tomeAura,
+/* ---------- Version 1.0 Startup Flow ----------
+   Click the closed ledger, fade directly to the correct first page.
+   First-time visitors see Aldren's name prompt.
+   Returning visitors open the last active archive.
+*/
 .tomeOpenSpread,
-.closedTome,
-.bookScene,
-.bookShadow,
-.openingBook{
+.characterGate{
   display:none !important;
+}
+
+.tomeGate.ledgerFadeOut{
+  animation:ledgerGateQuickFade .32s ease forwards !important;
+}
+
+/* Lock the tome in place during the fade. Do not apply the tome transform to the cover. */
+.tomeGate.ledgerFadeOut .ledgerTome{
+  animation:none !important;
+  transition:none !important;
+  transform:translate(-50%,-50%) rotate(-10deg) scale(1) !important;
+}
+
+.tomeGate.ledgerFadeOut .tomeCover{
+  animation:none !important;
+  transition:none !important;
+  transform:none !important;
+  opacity:1 !important;
+}
+
+@keyframes ledgerGateQuickFade{
+  from{opacity:1;}
+  to{opacity:0;}
 }
