@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --bg:#090603;
   --panel:#1b130b;
   --panel2:#2b1e11;
@@ -921,3 +921,99 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   opacity: 1 !important;
   text-shadow: none !important;
 }
+
+/* === Site-wide ledger readability polish START === */
+/* Makes non-Alchemy ledger tabs readable without touching the opening book or sidebar. */
+
+.ledgerPages .card,
+.ledgerPages .panel,
+.ledgerPages .notice,
+.ledgerPages .advisor,
+.ledgerPages .journalPanel,
+.ledgerPages .sessionPanel,
+.ledgerPages .workshopPanel,
+.ledgerPages .settingsPanel,
+.ledgerPages .savePanel,
+.ledgerPages .recipe,
+.ledgerPages .result,
+.ledgerPages .match,
+.ledgerPages .combo,
+.ledgerPages .entry,
+.ledgerPages .log,
+.ledgerPages .output,
+.ledgerPages .empty,
+.ledgerPages .empty-state,
+.ledgerPages fieldset,
+.ledgerPages details,
+.ledgerPages [id$="List"],
+.ledgerPages [id$="Log"],
+.ledgerPages [id$="Summary"],
+.ledgerPages [id$="Results"],
+.ledgerPages [id$="Output"] {
+  background:
+    linear-gradient(180deg, #f5e6bd 0%, #dec07f 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.85) !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.ledgerPages .card *,
+.ledgerPages .panel *,
+.ledgerPages .notice *,
+.ledgerPages .advisor *,
+.ledgerPages .journalPanel *,
+.ledgerPages .sessionPanel *,
+.ledgerPages .workshopPanel *,
+.ledgerPages .settingsPanel *,
+.ledgerPages .savePanel *,
+.ledgerPages .recipe *,
+.ledgerPages .result *,
+.ledgerPages .match *,
+.ledgerPages .combo *,
+.ledgerPages .entry *,
+.ledgerPages .log *,
+.ledgerPages .output *,
+.ledgerPages fieldset *,
+.ledgerPages details *,
+.ledgerPages [id$="List"] *,
+.ledgerPages [id$="Log"] *,
+.ledgerPages [id$="Summary"] *,
+.ledgerPages [id$="Results"] *,
+.ledgerPages [id$="Output"] * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+.ledgerPages button,
+.ledgerPages .controls button,
+.ledgerPages input[type="button"],
+.ledgerPages input[type="submit"] {
+  background:
+    linear-gradient(180deg, #e8c978 0%, #b77b31 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.9) !important;
+  text-shadow: none !important;
+}
+
+.ledgerPages button:hover,
+.ledgerPages .controls button:hover,
+.ledgerPages input[type="button"]:hover,
+.ledgerPages input[type="submit"]:hover {
+  background:
+    linear-gradient(180deg, #f4dc96 0%, #c88a3d 100%) !important;
+  color: #120904 !important;
+}
+
+.ledgerPages input,
+.ledgerPages textarea,
+.ledgerPages select {
+  background:
+    linear-gradient(180deg, #f8edc8 0%, #e5c98d 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.85) !important;
+}
+
+/* === Site-wide ledger readability polish END === */
+
