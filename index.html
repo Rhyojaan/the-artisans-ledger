@@ -188,6 +188,24 @@
                 <div class="notice">
                   Use this when you are stuck or do not want to craft randomly. The plan compares known reagent traits against missing traits, then points you toward useful experiments that can reveal the next undiscovered trait.
                 </div>
+
+                <div class="notice laboratoryUseChoice">
+                  <h3>Do you have Laboratory Use?</h3>
+                  <p>A gentle note before we begin, Rhyojaan.</p>
+                  <p>When you are able, place a point into Laboratory Use. With three reagents in a single mixture, each experiment has more to teach us. I will keep the ledger beside you and help choose the next recipe with care.</p>
+                  <p>One discovery at a time. That is how every craft becomes known.</p>
+                  <label class="row" for="laboratoryUseUnlocked" style="justify-content:flex-start;gap:10px;margin-top:10px">
+                    <input id="laboratoryUseUnlocked" class="laboratoryUseCheckbox" type="checkbox">
+                    <span>Yes, I have Laboratory Use</span>
+                  </label>
+                  <div class="small" style="margin-top:10px">
+                    <b>Unchecked:</b> No rush. We will work with two reagents for now.
+                  </div>
+                  <div class="small" style="margin-top:6px">
+                    <b>Checked:</b> With Laboratory Use, the bowl has room for a third reagent.
+                  </div>
+                </div>
+
                 <div class="controls" style="margin-top:12px">
                   <button onclick="buildPlan()">Calculate Trait Completion Plan</button>
                   <button class="secondary" onclick="inventoryOnly=!inventoryOnly;buildPlan();render()">Craftable-only: <span id="invMode2">OFF</span></button>

@@ -731,3 +731,152 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
     linear-gradient(180deg, #f0d58a 0%, #bd8438 100%) !important;
   border-color: rgba(92, 55, 18, 0.9) !important;
 }
+/* Lighten Alchemy dropdown/content boxes */
+.alchemyPage,
+.alchemyPanel,
+.alchemySection,
+.alchemyContent,
+.alchemyDrop,
+.alchemyDropdown,
+.traitCompletionPlan,
+.trait-plan,
+.traitPlan,
+.laboratoryUsePanel {
+  background:
+    linear-gradient(180deg, #e8d3a0 0%, #cda86a 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.8) !important;
+}
+
+.alchemyPage *,
+.alchemyPanel *,
+.alchemySection *,
+.alchemyContent *,
+.alchemyDrop *,
+.alchemyDropdown *,
+.traitCompletionPlan *,
+.trait-plan *,
+.traitPlan *,
+.laboratoryUsePanel * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* Lighten Alchemy dropdown cards directly */
+.alchemyPage > summary.alchemySubtab.card,
+.alchemyPage > summary.alchemySubtab.secondary.card,
+.alchemyPage .card.advisor,
+.alchemyPage .notice {
+  background:
+    linear-gradient(180deg, #f0dfb3 0%, #d6b777 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.85) !important;
+  box-shadow: none !important;
+}
+
+.alchemyPage > summary.alchemySubtab.card *,
+.alchemyPage > summary.alchemySubtab.secondary.card *,
+.alchemyPage .card.advisor *,
+.alchemyPage .notice * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* Final Alchemy readability sweep */
+.alchemyPage .card,
+.alchemyPage .panel,
+.alchemyPage .notice,
+.alchemyPage details,
+.alchemyPage fieldset,
+.alchemyPage .advisor,
+.alchemyPage .small,
+.alchemyPage .laboratoryUsePanel,
+.alchemyPage .traitCompletionPlan,
+.alchemyPage .traitPlan,
+.alchemyPage .recipe,
+.alchemyPage .recommendation,
+.alchemyPage .planBlock,
+.alchemyPage .plan-block,
+.alchemyPage .choice,
+.alchemyPage .choiceRow,
+.alchemyPage .choice-row {
+  background:
+    linear-gradient(180deg, #f2dfb0 0%, #d8b978 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.85) !important;
+  text-shadow: none !important;
+}
+
+.alchemyPage .card *,
+.alchemyPage .panel *,
+.alchemyPage .notice *,
+.alchemyPage details *,
+.alchemyPage fieldset *,
+.alchemyPage .advisor *,
+.alchemyPage .laboratoryUsePanel *,
+.alchemyPage .traitCompletionPlan *,
+.alchemyPage .traitPlan *,
+.alchemyPage .recipe *,
+.alchemyPage .recommendation *,
+.alchemyPage .planBlock *,
+.alchemyPage .plan-block *,
+.alchemyPage .choice *,
+.alchemyPage .choiceRow *,
+.alchemyPage .choice-row * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* Direct fix for generated Alchemy result boxes */
+#planSummary,
+#planList,
+#advisorText,
+#nextFive,
+#recipes,
+#effects,
+.alchemyPage .recipe,
+.alchemyPage .effectList {
+  background:
+    linear-gradient(180deg, #f4e4bb 0%, #dfc283 100%) !important;
+  color: #1f1008 !important;
+  border: 1px solid rgba(75, 42, 18, 0.85) !important;
+  border-radius: 10px !important;
+  padding: 12px !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+#planSummary *,
+#planList *,
+#advisorText *,
+#nextFive *,
+#recipes *,
+#effects *,
+.alchemyPage .recipe *,
+.alchemyPage .effectList * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* Lighten Alchemy action buttons */
+.alchemyPage button,
+.alchemyPage .controls button,
+.alchemyPage button.secondary,
+.alchemyPage button.good {
+  background:
+    linear-gradient(180deg, #e8c978 0%, #b77b31 100%) !important;
+  color: #1f1008 !important;
+  border-color: rgba(75, 42, 18, 0.9) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.alchemyPage button:hover,
+.alchemyPage .controls button:hover,
+.alchemyPage button.secondary:hover,
+.alchemyPage button.good:hover {
+  background:
+    linear-gradient(180deg, #f4dc96 0%, #c88a3d 100%) !important;
+  color: #120904 !important;
+}
+
