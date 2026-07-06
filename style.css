@@ -241,6 +241,7 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   100%{opacity:1;transform:scale(1)}
 }
 
+
 @keyframes ledgerGateFade{
   0%,76%{opacity:1}
   100%{opacity:0}
@@ -383,6 +384,7 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   opacity:0;
   z-index:6;
   pointer-events:none;
+  display:none;
 }
 
 /* Large magical glow that blooms outward from the ledger. */
@@ -407,6 +409,7 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   z-index:7;
   pointer-events:none;
   mix-blend-mode:screen;
+  display:none;
 }
 
 .openingLedger{
