@@ -879,4 +879,42 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
     linear-gradient(180deg, #f4dc96 0%, #c88a3d 100%) !important;
   color: #120904 !important;
 }
+/* Lighten generated Alchemy and Laboratory output rows */
+.alchemyPage div[id],
+.alchemyPage .recipe,
+.alchemyPage .result,
+.alchemyPage .match,
+.alchemyPage .combo,
+.alchemyPage .row,
+.alchemyPage li,
+#planList > *,
+#nextFive > *,
+#advisorText > *,
+#recipes > *,
+#effects > * {
+  background:
+    linear-gradient(180deg, #f5e6bd 0%, #dec07f 100%) !important;
+  color: #1f1008 !important;
+  border: 1px solid rgba(75, 42, 18, 0.85) !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
 
+.alchemyPage div[id] *,
+.alchemyPage .recipe *,
+.alchemyPage .result *,
+.alchemyPage .match *,
+.alchemyPage .combo *,
+.alchemyPage .row *,
+.alchemyPage li *,
+#planList > * *,
+#nextFive > * *,
+#advisorText > * *,
+#recipes > * *,
+#effects > * * {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
