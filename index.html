@@ -29,7 +29,6 @@
 
   <header class="ledgerTop">
     <h1>The Artisan's Ledger</h1>
-    <div class="small">Volume I — Alchemy — Maintained by Aldren the Archivist</div>
   </header>
 
   <div class="wrap">
@@ -46,41 +45,6 @@
     </div>
 
     <div id="app" style="display:none">
-      <div class="card advisor">
-        <h2 id="welcomeLine">Welcome back.</h2>
-        <div id="greetingBox" class="recipe"></div>
-      </div>
-
-      <div class="topgrid">
-        <div class="card">
-          <div class="small">Traits Recorded</div>
-          <div id="traitStat" class="stat">0/0</div>
-        </div>
-        <div class="card">
-          <div class="small">Reagents Complete</div>
-          <div id="ingStat" class="stat">0/0</div>
-        </div>
-        <div class="card">
-          <div class="small">Reagents Owned</div>
-          <div id="ownedStat" class="stat">0</div>
-        </div>
-        <div class="card">
-          <div class="small">Useful Experiments</div>
-          <div id="craftStat" class="stat">0</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="row">
-          <b>Archive Progress</b>
-          <b id="pct">0%</b>
-        </div>
-        <div class="bar">
-          <div id="fill" class="fill"></div>
-        </div>
-        <div id="remainingText" class="small" style="margin-top:8px"></div>
-      </div>
-
       <div class="ledgerShell">
         <aside class="ledgerSidebar">
           <div class="ledgerBrand">The Artisan's Ledger</div>
@@ -91,7 +55,6 @@
           <nav class="tabs ledgerContents">
             <button class="tab active" onclick="showTab('advisor',this)">Aldren</button>
             <button class="tab" onclick="showTab('professions',this)">Professions</button>
-            <button class="tab" onclick="showTab('builder',this)">Laboratory</button>
             <button class="tab" onclick="showTab('session',this)">Session</button>
             <button class="tab" onclick="showTab('verification',this)">Aldren's Workshop</button>
             <button class="tab" onclick="showTab('journal',this)">Character Journal</button>
@@ -103,67 +66,38 @@
         <main class="ledgerPages">
           <section id="advisor" class="panel active">
             <div class="card advisor">
-              <h2>Aldren's Recommendation</h2>
-              <div id="advisorText" class="recipe"></div>
-              <div class="controls" style="margin-top:12px">
-                <button class="good" onclick="markBest()">Crafted it — record discovery</button>
-                <button class="secondary" onclick="undoLast()">Undo Last Craft</button>
-                <button class="secondary" onclick="inventoryOnly=!inventoryOnly;render()">Craftable-only: <span id="invMode">OFF</span></button>
-                <button class="secondary" onclick="togglePlayMode()">Game Mode</button>
-              </div>
-            </div>
-
-            <div class="card">
-              <h2>Next 5 Experiments</h2>
-              <div id="nextFive"></div>
-            </div>
-
-            <div class="card advisor">
-              <h2>Inventory Report</h2>
-              <div id="aldrenInventoryAlert" class="recipe"></div>
-            </div>
-
-            <div class="card advisor">
-              <h2>Field Note</h2>
-              <div id="fieldNote" class="recipe"></div>
+              <h2 id="welcomeLine">Welcome back.</h2>
+              <div id="greetingBox" class="recipe"></div>
+              <p class="small">The workshop is ready, the ledger is open, and your next discovery is waiting. I’ll keep the record while you keep experimenting.</p>
             </div>
           </section>
 
           <section id="professions" class="panel">
             <div class="card advisor">
               <h2>Professions</h2>
-              <p class="small">Aldren keeps each crafting discipline as its own chapter. For Version 1.0, the open chapter is Alchemy.</p>
+              <p class="small">I’ve opened the professions ledger for you. We’ll begin with Alchemy and record each discovery as it reveals itself.</p>
             </div>
 
             <div class="card professionChapter">
               <div class="row">
                 <div>
                   <h2>Alchemy</h2>
-                  <p class="small">Reagents, solvents, and Aldren's completion path are kept together in this chapter.</p>
+                  <p class="small">Choose the Alchemy area you want Aldren to open. Only one section should be open at a time.</p>
                 </div>
-                <span class="pill">Volume I</span>
+                <span class="pill">Active Chapter</span>
               </div>
-              <div class="alchemySubtabs controls" style="margin-top:12px">
-                <button class="alchemySubtab active" onclick="showAlchemySubtab('alchemyPlan',this)">Completion Plan</button>
-                <button class="alchemySubtab secondary" onclick="showAlchemySubtab('alchemyReagents',this)">Reagents</button>
-              </div>
+
             </div>
 
-            <div id="alchemyPlan" class="alchemyPage active">
-              <div class="card">
-                <h2>Completion Plan</h2>
-                <p class="small">Aldren calculates a practical path from your current archive.</p>
-                <div class="controls">
-                  <button onclick="buildPlan()">Calculate Plan</button>
-                  <button class="secondary" onclick="inventoryOnly=!inventoryOnly;buildPlan();render()">Craftable-only: <span id="invMode2">OFF</span></button>
-                </div>
-                <div id="planSummary" class="notice">Click Calculate Plan.</div>
-                <div id="planList"></div>
-              </div>
-            </div>
+            <details id="alchemyReagents" class="alchemyPage active" name="alchemySections">
+              <summary class="alchemySubtab secondary card">
+                <b>Reagents</b>
+                <span class="small">Open the reagent ledger, solvent tracker, search, filters, and owned trait tools.</span>
+              </summary>
 
-            <div id="alchemyReagents" class="alchemyPage">
               <div class="card">
+                <h2>Alchemy — Reagents</h2>
+                <p class="small">Record the reagents you own, search by reagent or trait, and mark discoveries as you learn each ingredient's traits.</p>
                 <div class="controls">
                   <input id="search" placeholder="Search reagent or trait..." oninput="render()">
                   <select id="filter" onchange="render()">
@@ -178,25 +112,125 @@
                 </div>
               </div>
 
-              <h2 style="margin-top:18px">Solvents</h2>
-              <p class="small">Track potion waters and poison solvents here. The Laboratory uses these counts when checking craftability.</p>
-              <div id="solventList" class="solventGrid"></div>
+              <div class="card advisor">
+                <h2>Inventory Report</h2>
+                <div id="aldrenInventoryAlert" class="recipe"></div>
+              </div>
 
-              <h2 style="margin-top:18px">Reagent Ledger</h2>
-              <div id="list" class="grid"></div>
-            </div>
-          </section>
+              <div class="card">
+                <h2>Solvents</h2>
+                <p class="small">Track potion waters and poison solvents here. The Laboratory uses these counts when checking craftability.</p>
+                <div id="solventList" class="solventGrid"></div>
+              </div>
 
-          <section id="builder" class="panel">
-            <div class="card">
-              <h2>Laboratory</h2>
-              <p class="small">Pick one or more effects. Aldren lists mixtures that share all selected effects.</p>
-              <div id="effects" class="effectList"></div>
-            </div>
-            <div class="card">
-              <h2>Matching Recipes</h2>
-              <div id="recipes"></div>
-            </div>
+              <div class="card">
+                <h2>Reagent Ledger</h2>
+                <div id="list" class="grid"></div>
+              </div>
+            </details>
+
+            <details id="alchemyProgress" class="alchemyPage active" name="alchemySections">
+              <summary class="alchemySubtab secondary card">
+                <b>Progression</b>
+                <span class="small">Open your Alchemy archive totals, learned traits, completed reagents, and remaining work.</span>
+              </summary>
+
+              <div class="card">
+                <h2>Alchemy — Progression</h2>
+                <p class="small">Aldren tracks how much of your Alchemy archive is known and how many reagent traits still need discovery.</p>
+              </div>
+
+              <div class="topgrid">
+                <div class="card">
+                  <div class="small">Traits Recorded</div>
+                  <div id="traitStat" class="stat">0/0</div>
+                </div>
+                <div class="card">
+                  <div class="small">Reagents Complete</div>
+                  <div id="ingStat" class="stat">0/0</div>
+                </div>
+                <div class="card">
+                  <div class="small">Reagents Owned</div>
+                  <div id="ownedStat" class="stat">0</div>
+                </div>
+                <div class="card">
+                  <div class="small">Useful Experiments</div>
+                  <div id="craftStat" class="stat">0</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="row">
+                  <b>Archive Progress</b>
+                  <b id="pct">0%</b>
+                </div>
+                <div class="bar">
+                  <div id="fill" class="fill"></div>
+                </div>
+                <div id="remainingText" class="small" style="margin-top:8px"></div>
+              </div>
+
+              <div class="card advisor">
+                <h2>Field Note</h2>
+                <div id="fieldNote" class="recipe"></div>
+              </div>
+            </details>
+
+            <details id="alchemyPlan" class="alchemyPage active" name="alchemySections">
+              <summary class="alchemySubtab secondary card">
+                <b>Trait Completion Plan</b>
+                <span class="small">Open Aldren's main planning tool for discovering missing ingredient traits.</span>
+              </summary>
+
+              <div class="card advisor">
+                <h2>Alchemy — Trait Completion Plan</h2>
+                <p class="small">This is Aldren's core purpose. Aldren looks at the ingredient traits your character already knows, identifies the trait slots still missing, and suggests what ingredient or recipe you should make next to complete Alchemy trait discovery.</p>
+                <div class="notice">
+                  Use this when you are stuck or do not want to craft randomly. The plan compares known reagent traits against missing traits, then points you toward useful experiments that can reveal the next undiscovered trait.
+                </div>
+                <div class="controls" style="margin-top:12px">
+                  <button onclick="buildPlan()">Calculate Trait Completion Plan</button>
+                  <button class="secondary" onclick="inventoryOnly=!inventoryOnly;buildPlan();render()">Craftable-only: <span id="invMode2">OFF</span></button>
+                </div>
+                <div id="planSummary" class="notice">Click Calculate Trait Completion Plan.</div>
+                <div id="planList"></div>
+              </div>
+
+              <div class="card advisor">
+                <h2>Aldren's Recommendation</h2>
+                <p class="small">Aldren's next recommended experiment appears here when the archive can identify a useful discovery path.</p>
+                <div id="advisorText" class="recipe"></div>
+                <div class="controls" style="margin-top:12px">
+                  <button class="good" onclick="markBest()">Crafted it — record discovery</button>
+                  <button class="secondary" onclick="undoLast()">Undo Last Craft</button>
+                  <button class="secondary" onclick="inventoryOnly=!inventoryOnly;render()">Craftable-only: <span id="invMode">OFF</span></button>
+                  <button class="secondary" onclick="togglePlayMode()">Game Mode</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <h2>Next 5 Experiments</h2>
+                <p class="small">Use these experiments to keep moving toward trait completion instead of crafting at random.</p>
+                <div id="nextFive"></div>
+              </div>
+            </details>
+
+            <details id="builder" class="alchemyPage active" name="alchemySections">
+              <summary class="alchemySubtab secondary card">
+                <b>Laboratory</b>
+                <span class="small">Open the existing recipe-matching laboratory for selected effects.</span>
+              </summary>
+
+              <div class="card">
+                <h2>Alchemy — Laboratory</h2>
+                <p class="small">Pick one or more effects. Aldren lists mixtures that share all selected effects.</p>
+                <div id="effects" class="effectList"></div>
+              </div>
+              <div class="card">
+                <h2>Matching Recipes</h2>
+                <div id="recipes"></div>
+              </div>
+            </details>
           </section>
 
           <section id="session" class="panel">
