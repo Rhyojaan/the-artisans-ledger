@@ -673,3 +673,61 @@ body.playing{font-size:22px}body.playing .card{padding:24px}body.playing button,
   filter: none !important;
   box-shadow: none !important;
 }
+/* Readability polish for parchment text */
+.ledgerPages .muted,
+.ledgerPages .subtle,
+.ledgerPages .hint,
+.ledgerPages .description,
+.ledgerPages .subtitle,
+.ledgerPages .caption,
+.alchemyPage .muted,
+.alchemyPage .subtle,
+.alchemyPage .hint,
+.alchemyPage .description,
+.alchemyPage .subtitle,
+.alchemyPage .caption,
+.alchemySubtab,
+.alchemySubtab *,
+.tabNote,
+.tab-note {
+  color: #2b160c !important;
+}
+/* Strong readability polish for ledger text */
+.ledgerShell,
+.ledgerShell p,
+.ledgerShell span,
+.ledgerShell small,
+.ledgerShell div,
+.ledgerShell li,
+.ledgerShell button,
+.ledgerShell .tab,
+.ledgerShell .alchemySubtab,
+.ledgerShell .alchemySubtab *,
+.ledgerShell .tabNote,
+.ledgerShell .tab-note {
+  color: #1f1008 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* Lighten sidebar tabs so dark text stays readable */
+.ledgerSidebar .tab,
+.ledgerSidebar button,
+.ledgerSidebar [role="button"] {
+  color: #1f1008 !important;
+  background:
+    linear-gradient(180deg, #d8b56a 0%, #a8732f 100%) !important;
+  border-color: rgba(60, 34, 14, 0.75) !important;
+  text-shadow: none !important;
+}
+
+.ledgerSidebar .tab:hover,
+.ledgerSidebar button:hover,
+.ledgerSidebar [role="button"]:hover,
+.ledgerSidebar .tab.active,
+.ledgerSidebar button.active,
+.ledgerSidebar [role="button"].active {
+  color: #120904 !important;
+  background:
+    linear-gradient(180deg, #f0d58a 0%, #bd8438 100%) !important;
+  border-color: rgba(92, 55, 18, 0.9) !important;
+}
