@@ -75,7 +75,7 @@
           <section id="professions" class="panel">
             <div class="card advisor">
               <h2>Professions</h2>
-              <p class="small">I’ve opened the professions ledger for you. We’ll begin with Alchemy and record each discovery as it reveals itself.</p>
+              <p class="small">I’ve opened the professions ledger for you. Alchemy remains our active chapter, and Enchanting is being prepared here in the feature branch before it is ready for the live shelf.</p>
             </div>
 
             <div class="card professionChapter">
@@ -191,7 +191,7 @@
 
                 <div class="notice laboratoryUseChoice">
                   <h3>Do you have Laboratory Use?</h3>
-                  <p>A gentle note before we begin, <span data-character-name>Adventurer</span>.</p>
+                  <p>A gentle note before we begin, Rhyojaan.</p>
                   <p>When you are able, place a point into Laboratory Use. With three reagents in a single mixture, each experiment has more to teach us. I will keep the ledger beside you and help choose the next recipe with care.</p>
                   <p>One discovery at a time. That is how every craft becomes known.</p>
                   <label class="row" for="laboratoryUseUnlocked" style="justify-content:flex-start;gap:10px;margin-top:10px">
@@ -249,6 +249,126 @@
                 <div id="recipes"></div>
               </div>
             </details>
+
+            <div class="card professionChapter">
+              <div class="row">
+                <div>
+                  <h2>Enchanting</h2>
+                  <p class="small">The rune shelf is ready, Rhyojaan. Potency, Essence, and Aspect each have their own part to play. Bring them to the table one at a time, and I will help keep their meanings from slipping back into mystery.</p>
+                </div>
+                <span class="pill">Feature Branch Draft</span>
+              </div>
+              <div class="notice" style="margin-top:12px">
+                This Enchanting chapter is visible structure only for <b>feature/enchanting</b>. Aldren is setting the shelves in order before any Enchanting script logic is merged or published.
+              </div>
+              <p class="small" style="margin-top:12px">Choose which Enchanting page to open. Creation and Praxis will keep their notes tucked away until you call for them.</p>
+            </div>
+
+            <details id="enchantingCreation" class="alchemyPage active" name="enchantingSections">
+              <summary class="alchemySubtab secondary card">
+                <b>Creation</b>
+                <span class="small">Open the rune records, glyph references, translation progress, future recommendation plan, and glyph workshop notes.</span>
+              </summary>
+
+              <div class="card professionChapter">
+                <h2>Enchanting — Creation</h2>
+                <p class="small">Creation will hold the rune records, glyph references, translation progress, future recommendation plan, and manual glyph workshop.</p>
+
+                <div id="enchantingLevelSection" class="card">
+                  <h3>Profession Level</h3>
+                  <p>A small note for the ledger, Rhyojaan.</p>
+                  <p>You may mark your craft level here whenever it changes. I will remember it while choosing recipes, so the work I suggest stays suited to your hands.</p>
+                  <p>After this, I will not trouble you about it again. Change the number when you need to, and I will turn the page with you.</p>
+                  <label class="row" for="enchantingLevel" style="justify-content:flex-start;gap:10px;margin-top:10px">
+                    <span>Enchanting Level:</span>
+                    <input id="enchantingLevel" class="enchantingLevelInput" type="number" min="1" max="50" placeholder="1" style="max-width:90px">
+                    <span>/ 50</span>
+                  </label>
+                </div>
+
+                <div id="enchantingRunesSection" class="card">
+                  <h3>Runes</h3>
+                  <p class="small">A visible shelf for tracking the three rune families Aldren will eventually archive: Potency, Essence, and Aspect.</p>
+                  <div class="topgrid">
+                    <div>
+                      <div class="small">Potency Runes</div>
+                      <div class="notice">Future known / unknown Potency rune records.</div>
+                    </div>
+                    <div>
+                      <div class="small">Essence Runes</div>
+                      <div class="notice">Future known / unknown Essence rune records.</div>
+                    </div>
+                    <div>
+                      <div class="small">Aspect Runes</div>
+                      <div class="notice">Future known / unknown Aspect rune records.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="enchantingGlyphRecipesSection" class="card">
+                  <h3>Glyph Recipes</h3>
+                  <p class="small">Every glyph recipe begins with the same three-part structure:</p>
+                  <div class="recipe"><b>Potency Rune</b> + <b>Essence Rune</b> + <b>Aspect Rune</b></div>
+                  <p class="small" style="margin-top:10px">Potency shapes the level and direction of the glyph, Essence gives the glyph its meaning, and Aspect governs the strength of the result.</p>
+                </div>
+
+                <div id="enchantingProgressionSection" class="card">
+                  <h3>Progression</h3>
+                  <p class="small">A completion tracker for known and unknown rune translations. When script logic is ready, this area will show which rune meanings are already recorded and which are still waiting to be learned.</p>
+                  <div class="topgrid">
+                    <div>
+                      <div class="small">Known Translations</div>
+                      <div class="stat">0</div>
+                    </div>
+                    <div>
+                      <div class="small">Unknown Translations</div>
+                      <div class="stat">—</div>
+                    </div>
+                    <div>
+                      <div class="small">Archive Status</div>
+                      <div class="stat">Draft</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="enchantingTranslationPlanSection" class="card advisor">
+                  <h3>Translation Plan</h3>
+                  <p class="small">Aldren’s future recommendation area. This is where Aldren will eventually look at known rune translations, identify what is still unknown, and suggest the next glyph to craft so another rune meaning can be recorded.</p>
+                  <div class="notice">No Enchanting recommendation logic is active yet. This page marks the place where the Translation Plan will live once the profession is complete.</div>
+                </div>
+
+                <div id="enchantingGlyphWorkshopSection" class="card">
+                  <h3>Glyph Workshop</h3>
+                  <p class="small">Future manual crafting table. When Enchanting logic is ready, the player will be able to choose Potency + Essence + Aspect and see the glyph result.</p>
+                  <div class="recipe">Potency + Essence + Aspect → Glyph Result</div>
+                </div>
+              </div>
+            </details>
+
+            <details id="enchantingPraxis" class="alchemyPage active" name="enchantingSections">
+              <summary class="alchemySubtab secondary card">
+                <b>Praxis</b>
+                <span class="small">Open the future Praxis furnishing plan library and material tracking notes.</span>
+              </summary>
+
+              <div class="card professionChapter">
+                <h2>Enchanting — Praxis</h2>
+                <p class="small">Praxis records will belong here once the furnishing side of Enchanting is ready for the ledger.</p>
+
+                <div id="enchantingPraxisPlansSection" class="card">
+                  <h3>Furnishing Plans</h3>
+                  <p class="small">This will serve as both the Praxis library and the known / unknown checklist. The player should eventually be able to track which Praxis furnishing plans are known and which are still missing.</p>
+                  <div class="notice">Praxis plan tracking is not active yet.</div>
+                </div>
+
+                <div id="enchantingPraxisMaterialsSection" class="card">
+                  <h3>Materials Needed</h3>
+                  <p class="small">Future area for tracking the materials needed to craft Praxis furnishing plans.</p>
+                  <div class="notice">Material tracking for Praxis plans is not active yet.</div>
+                </div>
+              </div>
+            </details>
+
           </section>
 
           <section id="session" class="panel">
@@ -459,6 +579,7 @@ Notes:</textarea>
     </div>
   </div>
 
+  <script src="data/enchanting-data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
